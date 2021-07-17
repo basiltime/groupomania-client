@@ -4,9 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+let name = "Krystal"
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App name={name}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
