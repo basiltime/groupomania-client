@@ -1,0 +1,103 @@
+$primary: #8C089D;
+$secondary: #1F25B4;
+$border-color: #707070;
+$box-shadow-color: #cecece;
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-row-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#app {
+  @include flex-column-center;
+}
+
+nav {
+  background: $secondary;
+  background: linear-gradient(331deg, $secondary 12%, $primary 87%);
+  padding: 20px 0px;
+  width: 100%;
+  @include flex-row-between;
+  img {
+    margin-left: 70px;
+    transform: scale(2.70,2.70);
+    display: block;
+    width: 55px;
+  }
+  #account-icon {
+    margin-right: 30px; 
+    transform: scale(1.25, 1.25);
+  }
+}
+
+main {
+  @include flex-column-center; 
+  margin: 60px 0px;
+  padding: 15px;
+  width: 85%;
+  max-width: 350px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px $box-shadow-color;
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    input {
+    font-size: 16px;
+    padding-left: 15px;
+    border-radius: 5px;
+    height: 40px;
+    margin-bottom: 25px;
+    border: 1px solid $border-color;
+    box-shadow: 2px 2px 2px $box-shadow-color;
+    }
+  }
+  .button-link {
+    @include flex-column-center; 
+    color: white;
+    text-decoration: none;
+    background-color: $secondary;
+    border: 1px solid $border-color;
+    box-shadow: 2px 2px 2px $box-shadow-color;
+    border-radius: 5px;
+    height: 40px;
+    min-width: 200px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  .new-account-button {
+    @include flex-column-center;
+
+  }
+  input[type="file"] {
+    display: none;
+  }
+  #black-logo {
+    margin: 40px;
+    transform: scale(1.1, 1.1)
+  }
+ 
+  
+  
+
+}
+
+
+
+
+
+
+
+
+
