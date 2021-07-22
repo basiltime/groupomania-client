@@ -1,5 +1,5 @@
-$primary: #8C089D;
-$secondary: #1F25B4;
+$primary: #8c089d;
+$secondary: #1f25b4;
 $dark: #3c323d;
 $border-color: #707070;
 $box-shadow-color: #cecece;
@@ -25,8 +25,13 @@ $comment-color: #f2f2f2;
   border-radius: 5px;
 }
 
-@mixin button($color: $secondary, $font-size: 18px, $height: 40px, $padding: 0px 25px) {
-  @include flex-column-center; 
+@mixin button(
+  $color: $secondary,
+  $font-size: 18px,
+  $height: 40px,
+  $padding: 0px 25px
+) {
+  @include flex-column-center;
   @include border($border-color: $dark);
   padding: $padding;
   color: white;
@@ -51,36 +56,38 @@ $comment-color: #f2f2f2;
   @include flex-column-center;
 }
 
-nav {
+.nav {
   background: $secondary;
   background: linear-gradient(331deg, $secondary 12%, $primary 87%);
   padding: 20px 0px;
   width: 100%;
   @include flex-row-between;
-  img {
+  .logo__white {
     margin-left: 70px;
-    transform: scale(2.70,2.70);
+    transform: scale(2.7, 2.7);
     display: block;
     width: 55px;
   }
   .account-icon {
-    margin-right: 30px; 
+    margin-right: 30px;
     transform: scale(1.25, 1.25);
   }
 }
 
-main {
-  @include flex-column-center; 
+
+
+.main {
+  @include flex-column-center;
   @include border;
   margin: 60px 0px;
   padding: 15px;
   width: 85%;
   max-width: 350px;
-  #black-logo {
+  .logo__black {
     margin: 40px;
-    transform: scale(.65, .65)
+    transform: scale(0.65, 0.65);
   }
-  h2 {
+  .header {
     margin-bottom: 30px;
     text-align: center;
     width: 100%;
@@ -90,16 +97,20 @@ main {
     display: flex;
     flex-direction: column;
   }
+
   input {
     @include border;
     padding-left: 15px;
     height: 40px;
     margin-bottom: 25px;
-    &[type=text] {
+    &[type='text'] {
       font-size: 16px;
-    } 
-    &[type=email] {
+    }
+    &[type='email'] {
       font-size: 16px;
+    }
+    &[type='file'] {
+      display: none;
     }
   }
 
@@ -107,103 +118,102 @@ main {
     @include button();
   }
   .button-small {
-    @include button($color: $primary, $font-size: 15px, $height: 35px, $padding: 0px 15px)
+    @include button(
+      $color: $primary,
+      $font-size: 15px,
+      $height: 35px,
+      $padding: 0px 15px
+    );
   }
   .new-account-button {
     @include flex-column-center;
   }
-  input[type="file"] {
-    display: none;
-  }
-  
- &.news-feed {
-   border: none;
-   box-shadow: none;
-   #create-post-input-fake {
-    width: 95%;
-  }
-  .post {
-    @include border;
-    width: 100%;
 
-    .post-heading {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      .author-profile-pic {
-        margin: 15px;
-      }
-      h3 {
-        margin: 0;
-      }
-      p {
-        margin: 0;
-        color: $border-color;
-      }
+  &.news-feed {
+    border: none;
+    box-shadow: none;
+    #create-post-input-fake {
+      width: 95%;
     }
+    .post {
+      @include border;
+      width: 100%;
 
-    .post-body {
-      .post-body-image {
-        width: 100%;
-        object-fit: cover;
-      }
-      .post-body-text {
-        margin: 5px 10px;
-      }
-    }
-
-    .post-comments {
-      .post-likes-and-comments-qty {
-        margin-left: 10px;
-      }
-      .post-icons-wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        .post-icons {
-          margin: 3px;
-        }
-      }
-      .comment {
+      .post-heading {
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 5px;
-        .commenter-profile-pic {
-          width: 30px;
-          height: 30px;
-          margin: 5px;
+        .author-profile-pic {
+          margin: 15px;
         }
-        div {
-          padding: 8px;
-          font-size: smaller;
-          border-radius: 15px;
-          background-color: $comment-color;
-          margin: 5px;
+        h3 {
+          margin: 0;
+        }
+        p {
+          margin: 0;
+          color: $border-color;
+        }
+      }
+
+      .post-body {
+        .post-body-image {
+          width: 100%;
+          object-fit: cover;
+        }
+        .post-body-text {
+          margin: 5px 10px;
+        }
+      }
+
+      .post-comments {
+        .post-likes-and-comments-qty {
+          margin-left: 10px;
+        }
+        .post-icons-wrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          .post-icons {
+            margin: 3px;
+          }
+        }
+        .comment {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 5px;
+          .commenter-profile-pic {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+          }
+          div {
+            padding: 8px;
+            font-size: smaller;
+            border-radius: 15px;
+            background-color: $comment-color;
+            margin: 5px;
+          }
         }
       }
     }
   }
- }
 }
 
-textarea[type="text"] {
-  @include border;  
+textarea[type='text'] {
+  @include border;
   min-height: 200px;
   resize: none;
   font-family: unset;
   font-size: 16px;
-  padding: 10px; 
+  padding: 10px;
   margin: 20px 0px;
 }
-
-
 
 .profile-pic {
   color: $box-shadow-color;
   align-self: center;
   margin: 20px 0px;
-  
 }
 
 .all-account-details {
@@ -217,10 +227,11 @@ textarea[type="text"] {
 }
 
 hr {
-  @include hr
+  @include hr;
 }
 
-.trash-icon, .edit-icon {
+.trash-icon,
+.edit-icon {
   color: $dark;
 }
 
@@ -228,8 +239,3 @@ hr {
   font-size: larger;
   font-weight: 700;
 }
-
-
-
-
-

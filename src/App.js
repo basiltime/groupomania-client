@@ -40,17 +40,17 @@ function App() {
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 function Nav() {
-  return ( <nav>
-    <img src={logo} alt="logo" />
+  return ( <nav class="nav">
+    <img src={logo} alt="logo" class="logo__white" />
     <Link to="/my-account"><FontAwesomeIcon icon="user" className="account-icon" color="white" /></Link>
   </nav>)
 }
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 function LoginWrapper() {
-  return ( <main>
-    <img src="/black-logo.svg" alt="logo" id="black-logo" />
-    <h2>Log in to your account</h2>
+  return ( <main class="main">
+    <img src="/black-logo.svg" alt="logo" class="logo__black" />
+    <h2 class="header">Log in to your account</h2>
     {LoginForm()}
     {NewAccountButton()}
   </main>)
@@ -74,8 +74,8 @@ function NewAccountButton() {
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 function CreateNewAccountWrapper() { 
-  return ( <main>
-    <h2>Enter your details to create a new account</h2>
+  return ( <main class="main">
+    <h2 class="header">Enter your details to create a new account</h2>
     <form>
       <input type="text" name="username" placeholder="Username" aria-label="username" />
       <input type="email" name="email" placeholder="Email address" aria-label="email address" />
@@ -92,8 +92,8 @@ function CreateNewAccountWrapper() {
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 function AccountWrapper() {
-  return ( <main>
-    <h2>Your Account</h2>
+  return ( <main class="main">
+    <h2 class="header">Your Account</h2>
     <hr /> 
     <AccountDetails username="basiltime" email="bob@evans.com" />
     <hr />
@@ -128,9 +128,9 @@ function LogOut() {
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 function CreatePostWrapper() {
-  return ( <main className="create-post">
+  return ( <main class="main create-post">
     <form>
-    <h2>Create Post</h2>
+    <h2 class="header">Create Post</h2>
     <hr />
     <textarea type="text" name="create-post" placeholder="Start typing..." aria-label="Create Post" />
     <button className="button-small">Upload Photo or Video</button>
@@ -142,7 +142,7 @@ function CreatePostWrapper() {
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 function PostFeedWrapper() {
-  return ( <main class="news-feed">
+  return ( <main class="main news-feed">
     <input type="text" id="create-post-input-fake" placeholder="Create Post" aria-label="Create Post" />
     {Post()}
     {CreatePostLink()}
@@ -181,7 +181,8 @@ function Post() {
       <hr />
       <div class="comment">
       <FontAwesomeIcon icon="user-circle" className="commenter-profile-pic" />
-      <div>The hot sauce looks delicious! How hot is it though? 🥵 </div>
+      <div>Looks delicious! 😻
+      </div>
       </div>
     </div>
   </div>)
