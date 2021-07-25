@@ -5,6 +5,8 @@ $border-color: #707070;
 $box-shadow-color: #cecece;
 $comment-color: #f2f2f2;
 
+// Classes beginning with .l- are wrappers used for layout purposes only.
+
 @mixin flex-column-center {
   display: flex;
   flex-direction: column;
@@ -213,6 +215,13 @@ $comment-color: #f2f2f2;
   }
 }
 
+.delete-account {
+  @include border;
+  padding: 40px;
+  .l-buttons {
+    @include flex-row-between()
+  }
+}
 
 
 
