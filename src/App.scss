@@ -62,19 +62,17 @@ $comment-color: #f2f2f2;
   padding: 20px 0px;
   width: 100%;
   @include flex-row-between;
-  .logo__white {
+  .nav__logo{
     margin-left: 70px;
     transform: scale(2.7, 2.7);
     display: block;
     width: 55px;
   }
-  .account-icon {
+  .nav__icon {
     margin-right: 30px;
     transform: scale(1.25, 1.25);
   }
 }
-
-
 
 .main {
   @include flex-column-center;
@@ -82,42 +80,46 @@ $comment-color: #f2f2f2;
   margin: 60px 0px;
   padding: 15px;
   width: 85%;
-  max-width: 350px;
-  .logo__black {
+  max-width: 405px;
+  .main__logo {
     margin: 40px;
     transform: scale(0.65, 0.65);
   }
-  .header {
+  .main__header {
     margin-bottom: 30px;
     text-align: center;
     width: 100%;
   }
-  form {
+  .form {
     width: 100%;
     display: flex;
     flex-direction: column;
-  }
-
-  input {
+    font-size: 16px;
+  
+  .form__input {
     @include border;
     padding-left: 15px;
     height: 40px;
     margin-bottom: 25px;
-    &[type='text'] {
-      font-size: 16px;
-    }
-    &[type='email'] {
-      font-size: 16px;
-    }
+    font-size: 16px;
     &[type='file'] {
       display: none;
     }
   }
-
+  .form__textarea {
+    @include border;
+    min-height: 200px;
+    resize: none;
+    font-family: unset;
+    font-size: 16px;
+    padding: 10px;
+    margin: 20px 0px;
+  }
+}
   .button {
     @include button();
   }
-  .button-small {
+  .button--small {
     @include button(
       $color: $primary,
       $font-size: 15px,
@@ -125,117 +127,104 @@ $comment-color: #f2f2f2;
       $padding: 0px 15px
     );
   }
-  .new-account-button {
-    @include flex-column-center;
+  .hr {
+    @include hr;
   }
-
+  .profile-pic {
+    color: $box-shadow-color;
+    align-self: center;
+    margin: 20px 0px;
+  }
+  .account-details {
+      font-weight: 500;
+      font-size: 16px;
+      text-align: center;
+      .account-details__username {
+        font-size: larger;
+        font-weight: 700;
+      }
+      .trash-icon {
+        color: $dark;
+      }
+  }
   &.news-feed {
     border: none;
     box-shadow: none;
-    #create-post-input-fake {
-      width: 95%;
+  }
+  .post {
+    @include border;
+    width: 100%;
+    margin: 15px 0px;
+    .post__heading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .profile-pic {
+        margin: 15px;
+      }
+      .post__author {
+        margin: 0;
+      }
+      .post__timestamp {
+        margin: 0;
+      }
     }
-    .post {
-      @include border;
-      width: 100%;
+    .post__body {
+      .post__image {
+        width: 100%;
+        object-fit: cover;
+      }
+      .post__text-content {
+        margin: 5px 10px;
+      }
+    }
 
-      .post-heading {
+    .comments-and-likes {
+      .comments-and-likes__qty {
+        margin-left: 10px;
+      }
+      .icons__wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        .comments-and-likes__icons {
+          margin: 3px;
+        }
+      }
+      .comment {
         display: flex;
         flex-direction: row;
         align-items: center;
-        .author-profile-pic {
-          margin: 15px;
+        padding: 5px;
+        .comment__author-profile-pic {
+          width: 30px;
+          height: 30px;
+          margin: 5px;
         }
-        h3 {
-          margin: 0;
-        }
-        p {
-          margin: 0;
-          color: $border-color;
-        }
-      }
-
-      .post-body {
-        .post-body-image {
-          width: 100%;
-          object-fit: cover;
-        }
-        .post-body-text {
-          margin: 5px 10px;
-        }
-      }
-
-      .post-comments {
-        .post-likes-and-comments-qty {
-          margin-left: 10px;
-        }
-        .post-icons-wrapper {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          .post-icons {
-            margin: 3px;
-          }
-        }
-        .comment {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          padding: 5px;
-          .commenter-profile-pic {
-            width: 30px;
-            height: 30px;
-            margin: 5px;
-          }
-          div {
-            padding: 8px;
-            font-size: smaller;
-            border-radius: 15px;
-            background-color: $comment-color;
-            margin: 5px;
-          }
+        div {
+          padding: 8px;
+          font-size: smaller;
+          border-radius: 15px;
+          background-color: $comment-color;
+          margin: 5px;
         }
       }
     }
   }
 }
 
-textarea[type='text'] {
-  @include border;
-  min-height: 200px;
-  resize: none;
-  font-family: unset;
-  font-size: 16px;
-  padding: 10px;
-  margin: 20px 0px;
-}
 
-.profile-pic {
-  color: $box-shadow-color;
-  align-self: center;
-  margin: 20px 0px;
-}
 
-.all-account-details {
-  @include flex-column-center;
-}
 
-.account-details-minus-image {
-  font-weight: 500;
-  font-size: 16px;
-  text-align: center;
-}
 
-hr {
-  @include hr;
-}
 
-.trash-icon,
-.edit-icon {
-  color: $dark;
-}
 
-.username {
-  font-size: larger;
-  font-weight: 700;
-}
+
+
+
+
+
+
+
+
+
