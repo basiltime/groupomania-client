@@ -1,11 +1,12 @@
 import './App.scss'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faUserCircle, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from 'axios'
 
 library.add(faUser, faUserCircle, faThumbsUp, faComment, faTrash, faEdit)
 ///////////////////////////////////////////////////////////////////////////
@@ -86,41 +87,40 @@ function AccountWrapper() {
   return ( <main className="main">
     <h2 className="main__header">Your Account</h2>
     <hr className="hr"/> 
-    <AccountDetails username="basiltime" email="bob@evans.com" />
+    <AccountDetails email="bob@evans.com" />
     <hr className="hr" />
     {DeleteAccountButton()}
     <hr className="hr" />
     {LogOut()}
-    {DeleteAccount()}
   </main> )
 }
-function AccountDetails(props) {
+function AccountDetails() {
+ const [firstName, setFirstName] = useState(null)
+ const [lastName, setLastName] = useState(null)
+ const [email, setEmail] = useState(null)
+
+ useEffect(() => {
+  axios.get('http://localhost:3000/users/1')
+  .then(res => {
+    setFirstName(res.data.FirstName)
+    setLastName(res.data.LastName)
+    setEmail(res.data.Email)
+    console.log(res)
+  })
+   
+ })
   return ( <div className="account-details">
     
-      <p className="account-details__username">{props.username}</p>
-      <p className="account-details__password">{props.email}</p>
+      <p className="account-details__name">{firstName} {lastName} </p>
+      <p className="account-details__email">{email}</p>
+      <p className="account-details__password"></p>
     
     <FontAwesomeIcon icon={faUserCircle} className="profile-pic" size="10x"/>
   </div>)
+  
 }
 function DeleteAccountButton() {
   return ( <p>Delete Account&nbsp;&nbsp;<FontAwesomeIcon icon={faTrash} className={"trash-icon"} /></p> )
-}
-function DeleteAccount() {
-  return ( <div className="delete-account">
-    Are you sure you want to delete your Grouponania account?
-    <br />
-    <br />
-    <strong>This is permanent and cannot be undone.</strong>
-    <br />
-    <br />
-    <hr />
-    <br />
-    <div className="l-buttons">
-    <button className="button--small">Yes, delete my account</button>
-    <button className="button--small">Cancel</button>
-    </div>
-  </div>)
 }
 function LogOut() {
   return ( <button className="button">Log Out</button> )
@@ -154,8 +154,10 @@ function Newsfeed() {
     {Post()}
   </main>)
 }
+
 function Post() {
-  return ( <div className="post">
+  
+  return ( <div cl  assName="post">
     <div className="post__heading">
       <FontAwesomeIcon icon="user-circle" className="profile-pic" color="black" size="2x" />
       <div>
@@ -166,8 +168,7 @@ function Post() {
 
     <div className="post__body">
       <img className="post__image"src="/sample-img.jpg" alt="sample" ></img>
-      <p className="post__text-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco la
-      </p>
+      <p className="post__text-content">Introducing smoked habanero hot sauce! You can find it for sale on the HotTakes website. Please try it and leave me a good review!!!</p>
     </div>
 
     <div className="comments-and-likes">
@@ -185,13 +186,27 @@ function Post() {
       </div>
     </div>
   </div>)
-
 }
 ///////////////////////////////////////////////////////////////////////////
 export default App;
 
 
-
+// function DeleteAccount() {
+//   return ( <div className="delete-account">
+//     Are you sure you want to delete your Grouponania account?
+//     <br />
+//     <br />
+//     <strong>This is permanent and cannot be undone.</strong>
+//     <br />
+//     <br />
+//     <hr />
+//     <br />
+//     <div className="l-buttons">
+//     <button className="button--small">Yes, delete my account</button>
+//     <button className="button--small">Cancel</button>
+//     </div>
+//   </div>)
+// }
 
 
 
