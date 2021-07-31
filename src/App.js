@@ -1,7 +1,7 @@
 import './App.scss'
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faUserCircle, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
@@ -31,6 +31,9 @@ function App() {
           <Route path="/create-post">
             <CreatePost />
           </Route>
+          <Route path="/delete-account">
+            <DeleteAccount />
+          </Route>
         </Switch>
         </div>
           </Router>
@@ -40,7 +43,7 @@ function App() {
 function Nav() {
   return ( <nav className="nav">
     <Link to="/"><img className="nav__logo" src={logo} alt="logo" /></Link>
-    <Link className="nav__icon" to="/my-account"><FontAwesomeIcon icon="user" color="white" /></Link>
+    <Link className="nav__icon" to="/my-account" aria-label="My Account"><FontAwesomeIcon icon="user" color="white" aria-hidden="true" /></Link>
   </nav>)
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -80,7 +83,7 @@ function LoginForm() {
     
       <form onSubmit={handleSubmit(onSubmit)} className="form">
         <input {...register("email", { required: true })} type="email" className="form__input" placeholder="Email" aria-label="Email" />
-        <input {...register("password", { required: true, minLength: 10 })} type="text" className="form__input" placeholder="Password" aria-label="Password" />
+        <input {...register("password", { required: true, minLength: 6 })} type="text" className="form__input" placeholder="Password" aria-label="Password" />
         <button type="submit" className="button">Submit</button>
       </form>
   
@@ -95,31 +98,25 @@ function CreateNewAccountButton() {
 
 function CreateAccount() { 
   const { register, handleSubmit } = useForm();
-  let history = useHistory();
-  const handleSubmit = e => {
-    e.preventDefault();
-    e.stopPropagation();                              
-    history.push("/homepage");
-   };
-
+  const history =  useHistory();
 
   function onSubmit(data){
-    
+    history.push("/news-feed")
 
-    const userLogin = {
+    const newUser = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       password: data.password,
     }
 
-    console.log(userLogin)
+    console.log(newUser)
 
     axios.post('http://localhost:3000/users', {
-      firstName: userLogin.firstName,
-      lastName: userLogin.lastName,
-      email: userLogin.email,
-      password: userLogin.password,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      password: newUser.password,
     })
     .then(function (response) {
       console.log(response);
@@ -183,22 +180,46 @@ function AccountDetails() {
    
  }
 function DeleteAccountButton() {
-  return ( <p>Delete Account&nbsp;&nbsp;<FontAwesomeIcon icon={faTrash} className={"trash-icon"} /></p> )
+  return ( <Link to="/delete-account"><p>Delete Account&nbsp;&nbsp;<FontAwesomeIcon icon={faTrash} className={"trash-icon"} /></p> </ Link>)
 }
 function LogOut() {
   return ( <button className="button">Log Out</button> )
 }
 ///////////////////////////////////////////////////////////////////////////
 function CreatePost() {
+  const { register, handleSubmit } = useForm();
+  const history =  useHistory();
+
+  function onSubmit(data){
+    history.push("/news-feed")
+
+    const post = {
+      text: data.textContent
+    }
+
+    axios.post('http://localhost:3000/posts', {
+      content: post.text
+    })
+    .then(function (response) {
+      console.log(response);
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
   return ( <main className="main create-post">
-    <form className="form">
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
     <h2 className="main__header">Create Post</h2>
     <hr className="hr" />
-    <textarea className="form__textarea" type="text" name="create-post" placeholder="Start typing..." aria-label="Create Post" />
+    <input {...register("textContent", { required: true, minLength: 1})} className="form__textarea" type="text" name="textContent" placeholder="Start typing..." 
+    ariaLabel="Create Post" />
     <button className="button--small">Upload Photo or Video</button>
-    </form> 
+    
     <hr className="hr" />
-    <button className="button">Create Post</button>
+    <button className="button" type="submit">Create Post</button>
+    </form> 
     {PostCreated()}
   </main>)
 }
@@ -251,25 +272,34 @@ function Post() {
   </div>)
 }
 ///////////////////////////////////////////////////////////////////////////
+function DeleteAccount() {
+
+  const history =  useHistory();
+const handleRemoveAccount = (e) => {
+  
+  history.push("/")
+  axios.delete('http://localhost:3000/users/16', {
+    })
+    
+}
+
+  return ( <div className="main">
+    Are you sure you want to delete your Grouponania account?
+    <br />
+    <br />
+    <strong>This is permanent and cannot be undone.</strong>
+    <br />
+    <br />
+    <br />
+    <button type="submit" className="button--small" onClick={handleRemoveAccount}>YES, DELETE MY ACCOUNT</button>
+    <button className="button--small">Cancel</button>
+
+  </div>)
+}
 export default App;
 
 
-// function DeleteAccount() {
-//   return ( <div className="delete-account">
-//     Are you sure you want to delete your Grouponania account?
-//     <br />
-//     <br />
-//     <strong>This is permanent and cannot be undone.</strong>
-//     <br />
-//     <br />
-//     <hr />
-//     <br />
-//     <div className="l-buttons">
-//     <button className="button--small">Yes, delete my account</button>
-//     <button className="button--small">Cancel</button>
-//     </div>
-//   </div>)
-// }
+
 
 
 

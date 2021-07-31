@@ -215,13 +215,8 @@ $comment-color: #f2f2f2;
   }
 }
 
-.delete-account {
-  @include border;
-  padding: 40px;
-  .l-buttons {
-    @include flex-row-between()
-  }
-}
+
+
 
 
 
