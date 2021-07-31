@@ -7,6 +7,7 @@ import { faUser, faUserCircle, faEdit, faTrash } from '@fortawesome/free-solid-s
 import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios'
+import { useForm } from "react-hook-form";
 
 library.add(faUser, faUserCircle, faThumbsUp, faComment, faTrash, faEdit)
 ///////////////////////////////////////////////////////////////////////////
@@ -53,11 +54,36 @@ function LandingPage() {
   </main>)
 } 
 function LoginForm() {
-  return ( <form className="form">
-      <input className="form__input" type="email" name="email" placeholder="Enter email address" aria-label="Enter email address"/>
-      <input className="form__input" type="text" name="password" placeholder="Enter your password" aria-label="Enter password"/>
-      <Link to="/news-feed" className="button">Log In</ Link>
-  </form>
+
+  const { register, handleSubmit } = useForm();
+  function onSubmit(data){
+
+    const userLogin = {
+      email: data.email,
+      password: data.password
+    }
+
+    console.log(userLogin)
+
+    axios.post('http://localhost:3000/users', {
+      userLogin
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  return (
+    
+      <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <input {...register("email", { required: true })} type="email" className="form__input" placeholder="Email" aria-label="Email" />
+        <input {...register("password", { required: true, minLength: 10 })} type="text" className="form__input" placeholder="Password" aria-label="Password" />
+        <button type="submit" className="button">Submit</button>
+      </form>
+  
   );
 }
 function CreateNewAccountButton() {
@@ -66,28 +92,65 @@ function CreateNewAccountButton() {
 };
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+
 function CreateAccount() { 
+  const { register, handleSubmit } = useForm();
+  let history = useHistory();
+  const handleSubmit = e => {
+    e.preventDefault();
+    e.stopPropagation();                              
+    history.push("/homepage");
+   };
+
+
+  function onSubmit(data){
+    
+
+    const userLogin = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    }
+
+    console.log(userLogin)
+
+    axios.post('http://localhost:3000/users', {
+      firstName: userLogin.firstName,
+      lastName: userLogin.lastName,
+      email: userLogin.email,
+      password: userLogin.password,
+    })
+    .then(function (response) {
+      console.log(response);
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
+  }
   return ( <main className="main">
     <h2 className="main__header">Enter your details to create a new account</h2>
-    <form className="form">
-      <input className="form__input" type="text" name="username" placeholder="Username" aria-label="username" />
-      <input className="form__input" type="email" name="email" placeholder="Email address" aria-label="email address" />
-      <input className="form__input" type="text" name="password" placeholder="Password" aria-label="password" />
-      <input className="form__input" type="text" name="retype-password" placeholder="Re-enter password" aria-label="enter password again" />
-      <FontAwesomeIcon icon={faUserCircle} className="profile-pic" size="10x"/>
-      <label className="button--small" for="file-upload">Upload Profile Picture</label>
-      <input className="form__input" type="file" id="file-upload" aria-label="Upload profile picture"/>
-      <Link to="/news-feed" className="button">Create Account</Link>
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <input {...register("firstName", { required: true })} type="text" className="form__input" placeholder="First Name" aria-label="First Name" />
+        <input {...register("lastName", { required: true })} type="text" className="form__input" placeholder="Last Name" aria-label="Last Name" />
+        <input {...register("email", { required: true })} type="email" className="form__input" placeholder="Email" aria-label="Email" />
+        <input {...register("password", { required: true})} type="text" className="form__input" placeholder="Password" aria-label="Password" />
+      {/* <FontAwesomeIcon icon={faUserCircle} className="profile-pic" size="10x"/>
+      <label className="button--small" htmlFor="file-upload">Upload Profile Picture</label>
+      <input className="form__input" type="file" id="file-upload" aria-label="Upload profile picture"/> */}
+      <button type="submit" className="button">Create Account</button>
   </form>
   </main> 
   );
 }
-///////////////////////////////////////////////////////////////////////////
+
 function AccountWrapper() {
   return ( <main className="main">
     <h2 className="main__header">Your Account</h2>
     <hr className="hr"/> 
-    <AccountDetails email="bob@evans.com" />
+    <AccountDetails />
     <hr className="hr" />
     {DeleteAccountButton()}
     <hr className="hr" />
@@ -95,30 +158,30 @@ function AccountWrapper() {
   </main> )
 }
 function AccountDetails() {
- const [firstName, setFirstName] = useState(null)
- const [lastName, setLastName] = useState(null)
- const [email, setEmail] = useState(null)
-
- useEffect(() => {
-  axios.get('http://localhost:3000/users/1')
-  .then(res => {
-    setFirstName(res.data.FirstName)
-    setLastName(res.data.LastName)
-    setEmail(res.data.Email)
-    console.log(res)
+  const [firstName, setFirstName] = useState(null)
+  const [lastName, setLastName] = useState(null)
+  const [email, setEmail] = useState(null)
+ 
+  useEffect(() => {
+   axios.get('http://localhost:3000/users/1')
+   .then(res => {
+     setFirstName(res.data.FirstName)
+     setLastName(res.data.LastName)
+     setEmail(res.data.Email)
+     console.log(res)
+   })
+    
   })
+   return ( <div className="account-details">
+     
+       <p className="account-details__name">{firstName} {lastName} </p>
+       <p className="account-details__email">{email}</p>
+       <p className="account-details__password"></p>
+     
+     <FontAwesomeIcon icon={faUserCircle} className="profile-pic" size="10x"/>
+   </div>)
    
- })
-  return ( <div className="account-details">
-    
-      <p className="account-details__name">{firstName} {lastName} </p>
-      <p className="account-details__email">{email}</p>
-      <p className="account-details__password"></p>
-    
-    <FontAwesomeIcon icon={faUserCircle} className="profile-pic" size="10x"/>
-  </div>)
-  
-}
+ }
 function DeleteAccountButton() {
   return ( <p>Delete Account&nbsp;&nbsp;<FontAwesomeIcon icon={faTrash} className={"trash-icon"} /></p> )
 }
@@ -157,7 +220,7 @@ function Newsfeed() {
 
 function Post() {
   
-  return ( <div cl  assName="post">
+  return ( <div className="post">
     <div className="post__heading">
       <FontAwesomeIcon icon="user-circle" className="profile-pic" color="black" size="2x" />
       <div>
