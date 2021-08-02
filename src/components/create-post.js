@@ -7,7 +7,7 @@ function CreatePost() {
     const history =  useHistory();
   
     function onSubmit(data){
-      history.push("/news-feed")
+       history.push("/news-feed")
   
       const post = {
         text: data.textContent

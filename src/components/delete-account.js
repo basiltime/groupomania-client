@@ -4,10 +4,10 @@ import axios from 'axios'
 
 function DeleteAccount() {
 
-    const history =  useHistory();
+     const history =  useHistory();
     const handleRemoveAccount = (e) => {
     
-    history.push("/")
+     history.push("/")
     axios.delete('http://localhost:3000/users/16', {
       })
   }
