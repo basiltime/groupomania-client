@@ -1,5 +1,6 @@
 $primary: #8c089d;
 $secondary: #1f25b4;
+$warning: #8E045E;
 $dark: #3c323d;
 $border-color: #707070;
 $box-shadow-color: #cecece;
@@ -129,13 +130,29 @@ $comment-color: #f2f2f2;
       $padding: 0px 15px
     );
   }
+
+  .button--warning {
+    @include button(
+      $color: $warning,
+      $font-size: 15px,
+      $height: 35px,
+      $padding: 0px 15px
+    );
+  }
+
   .hr {
     @include hr;
   }
   .profile-pic {
+    @include border;
     color: $box-shadow-color;
-    align-self: center;
     margin: 20px 0px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-position: 0px -10px;
+    object-fit: cover;
+
   }
   .account-details {
       font-weight: 500;
