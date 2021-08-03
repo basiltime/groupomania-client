@@ -1,4 +1,4 @@
-import { BrowserRouter as Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -24,15 +24,15 @@ function AccountWrapper() {
     useEffect(() => {
      axios.get('http://localhost:3000/users/1')
      .then(res => {
-       setFirstName(res.data.FirstName)
-       setLastName(res.data.LastName)
-       setEmail(res.data.Email)
+       setFirstName(res.data.firstName)
+       setLastName(res.data.lastName)
+       setEmail(res.data.email)
        console.log(res)
      })
       
     })
      return ( <div className="account-details">
-         <img src="/jamesholden.jpeg" alt="james holden" className="profile-pic" />
+         <img src="/images/no-photo.png" alt="james holden" className="profile-pic" />
          <p className="account-details__name">{firstName} {lastName} </p>
          <p className="account-details__email">{email}</p>
          <p className="account-details__password"></p>

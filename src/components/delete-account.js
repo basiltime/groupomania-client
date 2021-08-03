@@ -8,7 +8,7 @@ function DeleteAccount() {
     const handleRemoveAccount = (e) => {
     
     history.push("/")
-    axios.delete('http://localhost:3000/users/16', {
+    axios.delete('http://localhost:3000/users/1', {
       })
   }
   

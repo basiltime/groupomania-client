@@ -119,26 +119,7 @@ $comment-color: #f2f2f2;
     margin: 20px 0px;
   }
 }
-  .button {
-    @include button();
-  }
-  .button--small {
-    @include button(
-      $color: $primary,
-      $font-size: 15px,
-      $height: 35px,
-      $padding: 0px 15px
-    );
-  }
-
-  .button--warning {
-    @include button(
-      $color: $warning,
-      $font-size: 15px,
-      $height: 35px,
-      $padding: 0px 15px
-    );
-  }
+  
 
   .hr {
     @include hr;
@@ -174,6 +155,9 @@ $comment-color: #f2f2f2;
   @include flex-column-center;
   border: none;
   box-shadow: none;
+  & button {
+    margin-top: 60px;
+  }
  
 }
 .post {
@@ -258,7 +242,26 @@ $comment-color: #f2f2f2;
 
 
 
+.button {
+  @include button();
+}
+.button--small {
+  @include button(
+    $color: $primary,
+    $font-size: 15px,
+    $height: 35px,
+    $padding: 0px 15px
+  );
+}
 
+.button--warning {
+  @include button(
+    $color: $warning,
+    $font-size: 15px,
+    $height: 35px,
+    $padding: 0px 15px
+  );
+}
 
 
 

@@ -45,7 +45,7 @@ function CreatePost() {
       <h2 className="main__header">Create Post</h2>
       <hr className="hr" />
       <input {...register("textContent", { required: true, minLength: 1})} className="form__textarea" type="text" name="textContent" placeholder="Start typing..." 
-      ariaLabel="Create Post" />
+      aria-label="Create Post" />
       <button className="button--small">Upload Photo or Video</button>
       <hr className="hr" />
       <button className="button" type="submit">Create Post</button>

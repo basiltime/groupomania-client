@@ -2,6 +2,7 @@ import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import '../App.scss'
 
 const Newsfeed = () => {
@@ -56,9 +57,18 @@ const Newsfeed = () => {
     }
   }, [observedEl, observer])
 
+  const history =  useHistory();
+
+  function handleClick(){
+    history.push("/create-post")
+  }
+
   return (
+    <div class="news-feed">
+      <button className="button" onClick={handleClick}>Create Post</button>
     <>
       {displayedPosts.map((post, i) => (
+        
         <div key={i} className="post">
           <div className="post__heading">
             <img src="images/no-photo.png"
@@ -101,6 +111,7 @@ const Newsfeed = () => {
         <p ref={setObservedEl}>LoadMore ...</p>
       )}
     </>
+    </div>
   )
 }
 
