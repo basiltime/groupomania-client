@@ -166,76 +166,94 @@ $comment-color: #f2f2f2;
         color: $dark;
       }
   }
-  &.news-feed {
-    border: none;
-    box-shadow: none;
+  
+}
+
+
+.news-feed {
+  @include flex-column-center;
+  border: none;
+  box-shadow: none;
+ 
+}
+.post {
+  @include border;
+  margin: 40px 0px;
+  max-width: 405px;
+  width: 100%;
+
+  .post__heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+   
+    .profile-pic {
+      margin: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .post__author {
+      margin: 0;
+    }
+
+    .post__timestamp {
+      margin: 0;
+      color: $border-color;
+    }
   }
-  .post {
-    @include border;
-    width: 100%;
-    margin: 15px 0px;
-    .post__heading {
+
+  .post__body {
+    .post__image {
+      width: 100%;
+      object-fit: cover;
+    }
+    .post__text-content {
+      margin: 5px 10px;
+    }
+  }
+
+
+
+  .comments-and-likes {
+    .comments-and-likes__qty {
+      margin-left: 10px;
+      color: $border-color;
+    }
+    .icons__wrapper {
       display: flex;
       flex-direction: row;
-      align-items: center;
-      .profile-pic {
-        margin: 15px;
-      }
-      .post__author {
-        margin: 0;
-      }
-      .post__timestamp {
-        margin: 0;
-      }
-    }
-    .post__body {
-      .post__image {
-        width: 100%;
-        object-fit: cover;
-      }
-      .post__text-content {
-        margin: 5px 10px;
+      justify-content: space-around;
+      .comments-and-likes__icons {
+        margin: 3px;
+
       }
     }
 
-    .comments-and-likes {
-      .comments-and-likes__qty {
-        margin-left: 10px;
+
+    .comment {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 5px;
+      .comment__author-profile-pic {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin: 5px;
       }
-      .icons__wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        .comments-and-likes__icons {
-          margin: 3px;
-        }
-      }
-      .comment {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 5px;
-        .comment__author-profile-pic {
-          width: 30px;
-          height: 30px;
-          margin: 5px;
-        }
-        div {
-          padding: 8px;
-          font-size: smaller;
-          border-radius: 15px;
-          background-color: $comment-color;
-          margin: 5px;
-        }
+      div {
+        padding: 8px;
+        font-size: smaller;
+        border-radius: 15px;
+        background-color: $comment-color;
+        margin: 5px;
       }
     }
   }
 }
-
-
-
-
-
 
 
 
