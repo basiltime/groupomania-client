@@ -1,9 +1,9 @@
 import './App.scss'
 import { Link, Route, Switch } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faUserCircle, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from './logo.svg';
 import LandingPage from './components/landing-page.js'
 import CreateAccount from './components/create-account.js'

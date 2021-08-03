@@ -32,7 +32,6 @@ function CreatePost() {
       <input {...register("textContent", { required: true, minLength: 1})} className="form__textarea" type="text" name="textContent" placeholder="Start typing..." 
       ariaLabel="Create Post" />
       <button className="button--small">Upload Photo or Video</button>
-      
       <hr className="hr" />
       <button className="button" type="submit">Create Post</button>
       </form> 
