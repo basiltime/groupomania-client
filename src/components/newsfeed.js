@@ -7,15 +7,13 @@ import '../App.scss'
 
 const Newsfeed = () => {
   const [data, setData] = useState([])
-
-  const firstDisplay = data.slice(0, 5)
+  const firstDisplay = data.slice()
   const [displayedPosts, setDisplayedPosts] = useState(firstDisplay)
   const [observedEl, setObservedEl] = useState(null)
 
   const fetchData = async () => {
-    const BASE_URL = 'http://localhost:3000/posts'
-    const result = await axios(BASE_URL)
-    setData(result.data)
+    const result = await axios('http://localhost:3000/posts')
+    setData(result.data.reverse())
   }
 
   useEffect(() => {

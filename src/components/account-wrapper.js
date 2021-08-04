@@ -32,7 +32,7 @@ function AccountWrapper() {
       
     })
      return ( <div className="account-details">
-         <img src="/images/no-photo.png" alt="james holden" className="profile-pic" />
+         <img src="/images/no-photo.png" alt="Profile Picure" className="profile-pic" />
          <p className="account-details__name">{firstName} {lastName} </p>
          <p className="account-details__email">{email}</p>
          <p className="account-details__password"></p>
@@ -43,7 +43,7 @@ function AccountWrapper() {
     return ( <Link to="/delete-account" className="button--warning"><p>Delete Account&nbsp;&nbsp;<FontAwesomeIcon icon={faTrash} className={"trash-icon"} /></p> </ Link>)
   }
   function LogOut() {
-    return ( <button className="button">Log Out</button> )
+    return ( <Link to="/"><button className="button">Log Out</button></Link> )
   }
 
 

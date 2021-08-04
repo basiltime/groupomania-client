@@ -60,6 +60,8 @@ $comment-color: #f2f2f2;
 }
 
 .nav {
+  position: sticky;
+  top: 0;
   background: $secondary;
   background: linear-gradient(331deg, $secondary 12%, $primary 87%);
   padding: 20px 0px;
