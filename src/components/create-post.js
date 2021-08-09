@@ -2,16 +2,15 @@ import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom"
 import axios from 'axios'
 
+
 function CreatePost() {
     const { register, handleSubmit } = useForm();
+
     const history =  useHistory();
-  
+
     function onSubmit(data){
-       history.push("/news-feed")
-  
        let date = new Date().toLocaleDateString()
        let time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-       
        let timestamp = `${date} at ${time}`
        
       const post = {
@@ -23,6 +22,7 @@ function CreatePost() {
         userId: 1
       }
   
+      
       axios.post('http://localhost:3000/posts', {
         textContent: post.text,
         firstName: post.firstName,
@@ -31,32 +31,31 @@ function CreatePost() {
         imageUrl: post.imageUrl,
         userId: post.userId,
       })
+      
       .then(function (response) {
         console.log(response);
-  
+        history.push("/news-feed")
+        
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(
+        history.push("/error-page")
+      );
       
     }
     return ( <main className="main create-post">
       <form onSubmit={handleSubmit(onSubmit)} className="form">
       <h2 className="main__header">Create Post</h2>
       <hr className="hr" />
-      <input {...register("textContent", { required: true, minLength: 1})} className="form__textarea" type="text" name="textContent" placeholder="Start typing..." 
+      <textArea {...register("textContent", { required: true, minLength: 1})} className="form__textarea" type="text" name="textContent" placeholder="Start typing..." 
       aria-label="Create Post" />
       <button className="button--small">Upload Photo or Video</button>
       <hr className="hr" />
       <button className="button" type="submit">Create Post</button>
       </form> 
-      {PostCreated()}
+      {/* {PostCreated()} */}
     </main>)
   }
 
-  function PostCreated() {
-    return (<div className="alert__post-created">
-      <h2>Post Created!</h2></div>)
-  }
+ 
   
   export default CreatePost

@@ -11,9 +11,14 @@ import AccountWrapper from './components/account-wrapper.js'
 import CreatePost from './components/create-post.js'
 import Newsfeed from './components/newsfeed.js'
 import DeleteAccount from './components/delete-account.js'
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 library.add(faUser, faUserCircle, faThumbsUp, faComment, faTrash, faEdit)
 
-
+const options = {
+  timeout: 2000,
+  position: positions.TOP_CENTER
+};
 
 function App() {
   return ( 
@@ -37,12 +42,18 @@ function App() {
             <AccountWrapper />
           </Route>
           <Route path="/create-post">
+        <Provider template={AlertTemplate} {...options}>
+          
+         
             <CreatePost />
+            </Provider>
           </Route>
+
           <Route path="/delete-account" >
             <DeleteAccount />
           </Route>
         </Switch>
+        
         </div>
   )
 }
