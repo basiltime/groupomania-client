@@ -18,7 +18,7 @@ function CreateAccount() {
   
       console.log(newUser)
   
-      axios.post('http://localhost:3000/users', {
+      axios.post('http://localhost:3000/users/signup', {
         firstName: newUser.firstName,
         lastName: newUser.lastName,
         email: newUser.email,

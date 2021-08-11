@@ -13,7 +13,7 @@ const Newsfeed = () => {
 
   const fetchData = async () => {
     const result = await axios('http://localhost:3000/posts')
-    setData(result.data.reverse())
+    //setData(result.data.reverse())
   }
 
   useEffect(() => {
