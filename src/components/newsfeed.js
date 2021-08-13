@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import '../App.scss'
+import token from '../helpers/auth'
 
 const Newsfeed = () => {
   const [data, setData] = useState([])
@@ -12,7 +13,11 @@ const Newsfeed = () => {
   const [observedEl, setObservedEl] = useState(null)
 
   const fetchData = async () => {
-    const result = await axios('http://localhost:3000/posts')
+    const result = await axios('http://localhost:3000/posts', {
+      headers: {
+        Authorization: token
+      }
+    })
     //setData(result.data.reverse())
   }
 

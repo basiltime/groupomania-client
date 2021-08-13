@@ -13,9 +13,6 @@ import { Link } from "react-router-dom";
 
 
 function LandingPage() {
-  
-   
-  
     return ( <main className="main">
       <img className="main__logo" src="/black-logo.svg" alt="logo" />
       <h2 className="main__header">Log in to your account</h2>
@@ -30,18 +27,16 @@ function LandingPage() {
     const { register, handleSubmit } = useForm();
 
     function onSubmit(data){
-      
-      const userLogin = {
+      localStorage.clear();
+      axios.post('http://localhost:3000/users/login', {
         email: data.email,
         password: data.password
-      }
-      history.push("/news-feed")
-    
-      axios.post('http://localhost:3000/users', {
-        userLogin
       })
-      .then(function (response) {
-        console.log(response);
+      .then(function (res) {
+        console.log('User Signed In!')
+        localStorage.setItem("userId", res.data.userId)
+        localStorage.setItem("token", res.data.token)
+        history.push("/news-feed")
       })
       .catch(function (error) {
         console.log(error);

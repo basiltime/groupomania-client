@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-
+import token from '../helpers/auth'
 
 function AccountWrapper() {
     return ( <main className="main">
@@ -22,7 +22,11 @@ function AccountWrapper() {
     const [email, setEmail] = useState(null)
    
     useEffect(() => {
-     axios.get('http://localhost:3000/users/1')
+     axios.get('http://localhost:3000/users/1', {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
      .then(res => {
        setFirstName(res.data.firstName)
        setLastName(res.data.lastName)
