@@ -1,15 +1,20 @@
-import { BrowserRouter as useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import axios from 'axios'
+import token from '../helpers/auth'
 
 
 function DeleteAccount() {
 
-     const history =  useHistory();
-    const handleRemoveAccount = (e) => {
-    
-    history.push("/")
-    axios.delete('http://localhost:3000/users/1', {
+    const history =  useHistory();
+    const handleRemoveAccount = () => {
+    const userId = localStorage.getItem("userId")
+    axios.delete(`http://localhost:3000/users/${userId}`, {
+      headers: {
+        Authorization: token
+      }
       })
+    localStorage.clear()
+    history.push("/")
   }
   
     return ( <div className="main">

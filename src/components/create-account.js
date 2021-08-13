@@ -4,30 +4,18 @@ import axios from 'axios'
 
 function CreateAccount() { 
     const { register, handleSubmit } = useForm();
-    const history =  useHistory();
-  
+    const history =  useHistory()
     function onSubmit(data){
-      history.push("/news-feed")
-  
-      const newUser = {
+      
+      axios.post('http://localhost:3000/users/signup', {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         password: data.password,
-      }
-  
-      console.log(newUser)
-  
-      axios.post('http://localhost:3000/users/signup', {
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-        password: newUser.password,
       })
-      .then(function (response) {
-        console.log(response);
-  
-      })
+      .then(
+        history.push('/')
+        )
       .catch(function (error) {
         console.log(error);
       });

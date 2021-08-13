@@ -22,16 +22,16 @@ function AccountWrapper() {
     const [email, setEmail] = useState(null)
    
     useEffect(() => {
-     axios.get('http://localhost:3000/users/1', {
+     const userId = localStorage.getItem("userId")
+     axios.get(`http://localhost:3000/users/${userId}`, {
       headers: {
-        authorization: `Bearer ${token}`
+        Authorization: token
       }
     })
      .then(res => {
        setFirstName(res.data.firstName)
        setLastName(res.data.lastName)
        setEmail(res.data.email)
-       console.log(res)
      })
       
     })
