@@ -55,8 +55,16 @@ $comment-color: #f2f2f2;
   width: 100%;
 }
 
+html, body {
+  min-height: 100%;
+  min-width: 100%;
+  padding: 0px 0px;
+  margin: 0px 0px;
+}
+
 #app {
   @include flex-column-center;
+  font-family: sans-serif;
 }
 
 .nav {
@@ -66,6 +74,7 @@ $comment-color: #f2f2f2;
   background: linear-gradient(331deg, $secondary 12%, $primary 87%);
   padding: 20px 0px;
   width: 100%;
+  margin: 0px;
   @include flex-row-between;
   .nav__logo{
     margin-left: 70px;
@@ -265,6 +274,15 @@ $comment-color: #f2f2f2;
   );
 }
 
+.error {
+  @include flex-column-center;
+  border-radius: 5px;
+  margin: 25px 0px;
+  width: 90%;
+  color: $primary;
+  background-color: lighten($primary, 55%);
+  padding: 20px;
+}
 
 
 

@@ -6,20 +6,23 @@ function CreateAccount() {
     const { register, handleSubmit } = useForm();
     const history =  useHistory()
     function onSubmit(data){
-      
+    localStorage.clear()
       axios.post('http://localhost:3000/users/signup', {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
         password: data.password,
       })
-      .then(
-        history.push('/')
-        )
+      .then(function (res) {
+        console.log(res.data)
+        localStorage.setItem("userId", res.data.userId)
+        localStorage.setItem("token", res.data.token)
+        history.push('/news-feed')
+      })
       .catch(function (error) {
         console.log(error);
       });
-      
+
     }
     return ( <main className="main">
       <h2 className="main__header">Enter your details to create a new account</h2>

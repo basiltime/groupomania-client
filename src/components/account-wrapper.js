@@ -4,6 +4,9 @@ import axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import token from '../helpers/auth'
+import { useHistory } from 'react-router-dom'
+
+
 
 function AccountWrapper() {
     return ( <main className="main">
@@ -16,6 +19,7 @@ function AccountWrapper() {
       {LogOut()}
     </main> )
   }
+
   function AccountDetails() {
     const [firstName, setFirstName] = useState(null)
     const [lastName, setLastName] = useState(null)
@@ -35,19 +39,29 @@ function AccountWrapper() {
      })
       
     })
+  
      return ( <div className="account-details">
          <img src="/images/no-photo.png" alt="Profile Picure" className="profile-pic" />
          <p className="account-details__name">{firstName} {lastName} </p>
          <p className="account-details__email">{email}</p>
          <p className="account-details__password"></p>
-     </div>)
+     </div> )
      
    }
+
   function DeleteAccountButton() {
     return ( <Link to="/delete-account" className="button--warning"><p>Delete Account&nbsp;&nbsp;<FontAwesomeIcon icon={faTrash} className={"trash-icon"} /></p> </ Link>)
   }
   function LogOut() {
-    return ( <Link to="/"><button className="button">Log Out</button></Link> )
+    const history = useHistory()
+    const handleClick = () => {
+      
+      console.log('You Clicked!')
+      localStorage.removeItem("token")
+      localStorage.removeItem("userId")
+      history.push('./')
+    }
+    return ( <button onClick={handleClick} className="button">Log Out</button> )
   }
 
 
