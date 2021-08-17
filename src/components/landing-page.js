@@ -27,7 +27,6 @@ function LandingPage() {
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState(null);
     
-
     function onSubmit(data){
       localStorage.clear();
       const loginRequest = async () => {
