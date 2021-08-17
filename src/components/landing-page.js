@@ -21,35 +21,30 @@ function LandingPage() {
       {CreateNewAccountButton()}
     </main>)
   } 
+
   function LoginForm() {
     const history =  useHistory();
-
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState(null);
+    
 
     function onSubmit(data){
       localStorage.clear();
-      axios.post('http://localhost:3000/users/login', {
+      const loginRequest = async () => {
+        try {
+        const resp = await axios.post('http://localhost:3000/users/login', {
         email: data.email,
-        password: data.password
-      })
-      .then(function (res) {
-        if (res.data.token) {
-        console.log('User Signed In!')
-        localStorage.setItem("userId", res.data.userId)
-        localStorage.setItem("token", res.data.token)
+        password: data.password})
+        localStorage.setItem("token", resp.data.token)
+        localStorage.setItem("userId", resp.data.userId)
         history.push("/news-feed")
-        }
-      })
-      .catch(
-        console.log('Email or password is incorrect'),
+        } catch {
         setError('The email or password you entered is incorrect')
-      );
+        }
     }
+    loginRequest()
+  }
 
-    
-    
-    
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           {error && <div className="error"> {error} </div>}
