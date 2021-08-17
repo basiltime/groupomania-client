@@ -47,8 +47,8 @@ function LandingPage() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           {error && <div className="error"> {error} </div>}
-          <input {...register("email", { required: true })} type="email" className="form__input" placeholder="Email" aria-label="Email" />
-          <input {...register("password", { required: true, minLength: 6 })} type="password" className="form__input" placeholder="Password" aria-label="Password" />
+          <input {...register("email", { required: true })} autocomplete="off" type="email" className="form__input" placeholder="Email" aria-label="Email" />
+          <input {...register("password", { required: true, minLength: 6 })} autocomplete="off" type="password" className="form__input" placeholder="Password" aria-label="Password" />
           <button type="submit" className="button">Log In</button>
         </form>
     );

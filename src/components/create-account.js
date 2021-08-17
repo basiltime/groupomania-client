@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import axios from 'axios'
 
 function CreateAccount() { 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: {errors} } = useForm();
     const history =  useHistory()
     function onSubmit(data){
     localStorage.clear()
@@ -27,13 +27,14 @@ function CreateAccount() {
     return ( <main className="main">
       <h2 className="main__header">Enter your details to create a new account</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="form">
-          <input {...register("firstName", { required: true })} type="text" className="form__input" placeholder="First Name" aria-label="First Name" />
-          <input {...register("lastName", { required: true })} type="text" className="form__input" placeholder="Last Name" aria-label="Last Name" />
-          <input {...register("email", { required: true })} type="email" className="form__input" placeholder="Email" aria-label="Email" />
-          <input {...register("password", { required: true})} type="text" className="form__input" placeholder="Password" aria-label="Password" />
-        {/* <FontAwesomeIcon icon={faUserCircle} className="profile-pic" size="10x"/>
-        <label className="button--small" htmlFor="file-upload">Upload Profile Picture</label>
-        <input className="form__input" type="file" id="file-upload" aria-label="Upload profile picture"/> */}
+      {errors.firstName && ( <div role="alert" className="error">First name is required</div>)}
+      {errors.lastName && ( <div role="alert" className="error">Last name is required</div>)}
+      {errors.email && ( <div role="alert" className="error">Email is required</div>)}
+      {errors.password && ( <div role="alert" className="error">Password is required</div>)}
+          <input {...register("firstName", { required: true })} autocomplete="off" type="text" className="form__input" placeholder="First Name" aria-label="First Name" />
+          <input {...register("lastName", { required: true })} autocomplete="off" type="text" className="form__input" placeholder="Last Name" aria-label="Last Name" />
+          <input {...register("email", { required: true })} autocomplete="off" type="email" className="form__input" placeholder="Email" aria-label="Email" />
+          <input {...register("password", { required: true})} autocomplete="off" type="password" className="form__input" placeholder="Password" aria-label="Password" />
         <button type="submit" className="button">Create Account</button>
     </form>
     </main> 

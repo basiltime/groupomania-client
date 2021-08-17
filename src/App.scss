@@ -120,6 +120,9 @@ html, body {
       display: none;
     }
   }
+  .form__input:nth-of-type(1) {
+    margin-top: 25px;
+  }
   .form__textarea {
     @include border;
     min-height: 200px;
@@ -277,7 +280,7 @@ html, body {
 .error {
   @include flex-column-center;
   border-radius: 5px;
-  margin: 25px 0px;
+  margin: 15px 0px 15px 0px;
   width: 90%;
   color: $primary;
   background-color: lighten($primary, 55%);
