@@ -13,7 +13,8 @@ function AccountWrapper() {
   const [lastName, setLastName] = useState(null)
   const [email, setEmail] = useState(null)
   const [error, setError] = useState(null)
-
+  
+  const token = localStorage.getItem("token")
   const userId = localStorage.getItem('userId')
   const userData = async () => {
     try {
@@ -25,14 +26,16 @@ function AccountWrapper() {
       setFirstName(resp.data.firstName)
       setLastName(resp.data.lastName)
       setEmail(resp.data.email)
-    } catch {
-      setError('Problem retrieving account information')
+      
+    } catch(error) {
+      if (error) {setError('Problem retrieving account information')}
     }
   }
-
   userData()
 
+  
   return (
+    
     <main className="main">
       <h2 className="main__header">Your Account</h2>
       <hr className="hr" />
@@ -53,7 +56,8 @@ function AccountWrapper() {
       {DeleteAccountButton()}
       <hr className="hr" />
       {LogOut()}
-    </main>
+   
+    </main> 
   )
 }
 

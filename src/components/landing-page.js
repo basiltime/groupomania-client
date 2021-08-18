@@ -58,7 +58,7 @@ function LoginForm() {
       {error && <div className="error"> {error} </div>}
       <input
         {...register('email', { required: true })}
-        autocomplete="off"
+        autoComplete="off"
         type="email"
         className="form__input"
         placeholder="Email"
@@ -66,7 +66,7 @@ function LoginForm() {
       />
       <input
         {...register('password', { required: true, minLength: 6 })}
-        autocomplete="off"
+        autoComplete="off"
         type="password"
         className="form__input"
         placeholder="Password"

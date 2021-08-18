@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom"
 import axios from 'axios'
-import token from '../helpers/auth'
+
 
 
 function DeleteAccount() {
@@ -8,6 +8,7 @@ function DeleteAccount() {
     const history =  useHistory();
     const handleRemoveAccount = () => {
     const userId = localStorage.getItem("userId")
+    const token = localStorage.getItem("token")
     axios.delete(`http://localhost:3000/users/${userId}`, {
       headers: {
         Authorization: token
