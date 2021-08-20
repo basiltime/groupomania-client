@@ -1,23 +1,38 @@
-import { useHistory } from "react-router-dom"
+//import { useHistory } from "react-router-dom"
 import axios from 'axios'
 
 
 
 function DeleteAccount() {
+    //const history =  useHistory();
+    
 
-    const history =  useHistory();
     const handleRemoveAccount = () => {
+    
     const userId = localStorage.getItem("userId")
     const token = localStorage.getItem("token")
-    axios.delete(`http://localhost:3000/users/${userId}`, {
+    const deleteAcct = async () => {
+    
+    try {
+    await axios.delete(`http://localhost:3000/users/${userId}`, {
       headers: {
-        Authorization: token
+        Authorization: token,
       }
       })
-    localStorage.clear()
-    history.push("/")
+  } catch (error) {
+    console.log(error)
   }
+    }
+
+    deleteAcct()
+    
+  }
+
   
+  
+  
+
+
     return ( <div className="main">
       Are you sure you want to delete your Grouponania account?
       <br />

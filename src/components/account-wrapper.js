@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import token from '../helpers/auth'
 import { useHistory } from 'react-router-dom'
 
 

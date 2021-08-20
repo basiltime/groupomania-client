@@ -279,6 +279,8 @@ html, body {
 
 .error {
   @include flex-column-center;
+  text-align: center;
+  line-height: 20px;
   border-radius: 5px;
   margin: 15px 0px 15px 0px;
   width: 90%;
