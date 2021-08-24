@@ -1,10 +1,10 @@
-//import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import axios from 'axios'
 
 
 
 function DeleteAccount() {
-    //const history =  useHistory();
+    const history =  useHistory();
     
 
     const handleRemoveAccount = () => {
@@ -19,13 +19,14 @@ function DeleteAccount() {
         Authorization: token,
       }
       })
+      localStorage.clear();
   } catch (error) {
     console.log(error)
   }
     }
 
     deleteAcct()
-    
+    history.push("/")
   }
 
   
