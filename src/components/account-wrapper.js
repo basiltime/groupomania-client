@@ -74,7 +74,6 @@ function DeleteAccountButton() {
 function LogOut() {
   const history = useHistory()
   const handleClick = () => {
-    console.log('You Clicked!')
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     history.push('./')
