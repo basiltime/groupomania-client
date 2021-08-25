@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom"
-import { useState } from 'react'
 import axios from 'axios'
 
 
 function CreatePost() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [error, setError] = useState(null)
+   
     const history =  useHistory();
     const userId = localStorage.getItem("userId")
     const token = localStorage.getItem("token")
