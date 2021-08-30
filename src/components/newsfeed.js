@@ -22,6 +22,7 @@ const Newsfeed = () => {
       }
     })
     setData(result.data.data.reverse())
+    console.log(result.data.data)
   }
 
   useEffect(() => {
@@ -107,7 +108,7 @@ const Newsfeed = () => {
               className="comment__author-profile-pic"
               alt="Profile Picure"
             />
-              <div>This is a placeholder comment</div>
+              <div>{post.commentText}</div>
             </div>
           </div>
         </div>
