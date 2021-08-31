@@ -1,12 +1,14 @@
 $primary: #8c089d;
 $secondary: #1f25b4;
-$warning: #8E045E;
+$warning: #8e045e;
 $dark: #3c323d;
 $border-color: #707070;
 $box-shadow-color: #cecece;
 $comment-color: #f2f2f2;
 
-// Classes beginning with .l- are wrappers used for layout purposes only.
+// Classes beginning with .l- are wrappers used for layout purposes only,
+// they do not apply styles.
+
 
 @mixin flex-column-center {
   display: flex;
@@ -55,7 +57,8 @@ $comment-color: #f2f2f2;
   width: 100%;
 }
 
-html, body {
+html,
+body {
   min-height: 100%;
   min-width: 100%;
   padding: 0px 0px;
@@ -76,7 +79,7 @@ html, body {
   width: 100%;
   margin: 0px;
   @include flex-row-between;
-  .nav__logo{
+  .nav__logo {
     margin-left: 70px;
     transform: scale(2.7, 2.7);
     display: block;
@@ -87,6 +90,11 @@ html, body {
     transform: scale(1.25, 1.25);
   }
 }
+
+input:focus {
+  outline: none !important;
+}
+
 
 .main {
   @include flex-column-center;
@@ -109,31 +117,33 @@ html, body {
     display: flex;
     flex-direction: column;
     font-size: 16px;
-  
-  .form__input {
-    @include border;
-    padding-left: 15px;
-    height: 40px;
-    margin-bottom: 25px;
-    font-size: 16px;
-    &[type='file'] {
-      display: none;
+
+    .form__input {
+      @include border;
+      padding-left: 15px;
+      height: 40px;
+      margin-bottom: 25px;
+      font-size: 16px;
+      &[type='file'] {
+        display: none;
+      }
+    }
+    .form__input:nth-of-type(1) {
+      margin-top: 25px;
+    }
+    .form__textarea {
+      @include border;
+      min-height: 200px;
+      resize: none;
+      font-family: unset;
+      font-size: 16px;
+      padding: 10px;
+      margin: 20px 0px;
+    }
+    :focus {
+      outline: none !important;
     }
   }
-  .form__input:nth-of-type(1) {
-    margin-top: 25px;
-  }
-  .form__textarea {
-    @include border;
-    min-height: 200px;
-    resize: none;
-    font-family: unset;
-    font-size: 16px;
-    padding: 10px;
-    margin: 20px 0px;
-  }
-}
-  
 
   .hr {
     @include hr;
@@ -147,23 +157,20 @@ html, body {
     border-radius: 50%;
     object-position: 0px -10px;
     object-fit: cover;
-
   }
   .account-details {
-      font-weight: 500;
-      font-size: 16px;
-      text-align: center;
-      .account-details__username {
-        font-size: larger;
-        font-weight: 700;
-      }
-      .trash-icon {
-        color: $dark;
-      }
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    .account-details__username {
+      font-size: larger;
+      font-weight: 700;
+    }
+    .trash-icon {
+      color: $dark;
+    }
   }
-  
 }
-
 
 .news-feed {
   @include flex-column-center;
@@ -172,7 +179,6 @@ html, body {
   & button {
     margin-top: 60px;
   }
- 
 }
 .post {
   @include border;
@@ -185,7 +191,6 @@ html, body {
     flex-direction: row;
     align-items: center;
 
-   
     .profile-pic {
       margin: 15px;
       width: 40px;
@@ -214,46 +219,62 @@ html, body {
   }
 
 
+  .comments-and-likes__qty {
+    margin-left: 10px;
+    color: $border-color;
+  }
+  .l-icons-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .comments-and-likes__icons {
+    border-style: none;
+    background-color: #ffffff;
+    margin: 3px;
+    color: $primary;
+    font-size: 1.25em;
+  }
 
-  .comments-and-likes {
-    .comments-and-likes__qty {
-      margin-left: 10px;
-      color: $border-color;
+  .comments {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 5px;
+    .comment__author-profile-pic {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      margin: 5px;
     }
-    .icons__wrapper {
+    .comment-and-profile-pic {
+      width: 100%;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      .comments-and-likes__icons {
-        margin: 3px;
-
-      }
     }
-
-
-    .comments {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      padding: 5px;
-      .comment__author-profile-pic {
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        margin: 5px;
-      }
-      .comment {
-        padding: 8px;
-        font-size: smaller;
-        border-radius: 15px;
-        background-color: $comment-color;
-        margin: 5px;
-      }
+    .comment {
+      width: fit-content;
+      padding: 8px;
+      font-size: smaller;
+      border-radius: 15px;
+      background-color: $comment-color;
+      margin: 5px;
     }
   }
 }
-
+.comment-form {
+  width: 100%;
+  @include flex-column-center();
+  margin: 0px 10px 25px 10px;
+}
+.comment-input {
+  @include border;
+      width: 100%;
+      height: 30px;
+      padding-left: 10px;
+      
+}
 
 
 
@@ -289,10 +310,3 @@ html, body {
   background-color: lighten($primary, 55%);
   padding: 20px;
 }
-
-
-
-
-
-
-

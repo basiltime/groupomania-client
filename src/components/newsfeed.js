@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 import '../App.scss'
 
 const Newsfeed = () => {
@@ -95,9 +96,8 @@ const Newsfeed = () => {
               ></img>
               <p className="post__text-content">{post.textContent}</p>
             </div>
-            
-              <Comment postId={post.postId} />
-            
+
+            <Comment postId={post.postId} />
           </div>
         ))}
 
@@ -110,7 +110,11 @@ const Newsfeed = () => {
 }
 
 function Comment(props) {
+  const history = useHistory()
   const [commentsList, setCommentsList] = useState([])
+  const [commentFieldOpen, setCommentFieldOpen] = useState(false)
+  const { register, handleSubmit } = useForm()
+
   const fetchComments = async () => {
     let token = localStorage.getItem('token')
     const comments = await axios('http://localhost:3000/comments', {
@@ -125,30 +129,78 @@ function Comment(props) {
     fetchComments()
   }, [])
 
+  function showInput() {
+    setCommentFieldOpen(true)
+  }
+
+  function onSubmit(data) {
+    let token = localStorage.getItem('token')
+    let userId = localStorage.getItem('userId')
+    console.log(data.textContent)
+    axios
+      .post(
+        'http://localhost:3000/comments',
+        {
+          commentText: data.textContent,
+          postId: props.postId,
+          commenterId: userId,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
+
+      .then(function (response) {
+        console.log(response)
+        history.push('/news-feed')
+      })
+      .catch(history.push('/error-page'))
+  }
+
   return (
-    <div className="comments-and-likes">
-              <p className="comments-and-likes__qty">
-                1 like&nbsp;&nbsp;&nbsp; 1 comment
-              </p>
-              <hr className="hr" />
-              <div className="icons__wrapper">
-                <FontAwesomeIcon icon={faThumbsUp} className={'post-icons'} />
-                <FontAwesomeIcon icon={faComment} className={'post-icons'} />
+    <div>
+      <p className="comments-and-likes__qty">
+        1 like&nbsp;&nbsp;&nbsp; 1 comment
+      </p>
+      <hr className="hr" />
+      <div className="l-icons-wrapper">
+        <button className={'comments-and-likes__icons'}>
+          <FontAwesomeIcon icon={faThumbsUp} />
+        </button>
+        <button
+          type="button"
+          onClick={showInput}
+          className={'comments-and-likes__icons'}
+        >
+          <FontAwesomeIcon icon={faComment} />
+        </button>
+      </div>
+      <hr className="hr" />
+      <div className="comments">
+        {commentFieldOpen && (
+          <form onSubmit={handleSubmit(onSubmit)} class="comment-form">
+            <input class="comment-input" placeholder="Type comment here" autoComplete={false}
+              {...register('textContent', { required: true, minLength: 1 })}
+            ></input>
+          </form>
+        )}
+
+        {commentsList.map(
+          (comment) =>
+            comment.postId === props.postId && (
+              <div key={comment.commentId} class="comment-and-profile-pic">
+                <img
+                  src="images/no-photo.png"
+                  className="comment__author-profile-pic"
+                  alt="Profile Picure"
+                />
+                <div class="comment">{comment.commentText}</div>
               </div>
-              <hr className="hr" />
-    <div className="comments">
-      {commentsList.map((comment) => (
-        comment.postId === props.postId && 
-        <div key={comment.commentId} class="comment">
-          <img
-        src="images/no-photo.png"
-        className="comment__author-profile-pic"
-        alt="Profile Picure"
-      />
-          {comment.commentText}
-          </div>
-      ))}
-    </div>
+            ),
+        )}
+      </div>
     </div>
   )
 }
