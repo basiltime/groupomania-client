@@ -34,10 +34,11 @@ describe('successful account creation, logout, login, and account deletion', () 
     cy.wait(2000)
     cy.visit('http://localhost:3006/delete-account')
     cy.wait(2000)
-    cy.reload()
+   
     cy.contains('YES, DELETE MY ACCOUNT').click()
-    cy.reload()
+    
   })
+
 })
 
 describe('login form error handling', () => {

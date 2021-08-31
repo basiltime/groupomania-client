@@ -9,35 +9,47 @@ import '../App.scss'
 
 
 const Newsfeed = () => {
-  const [data, setData] = useState([])
-  const firstDisplay = data.slice(0, 5)
+  const [posts, setPosts] = useState([])
+  const [comments, setComments] = useState([])
+  const firstDisplay = posts.slice(0, 5)
   const [displayedPosts, setDisplayedPosts] = useState(firstDisplay)
   const [observedEl, setObservedEl] = useState(null)
 
-  const fetchData = async () => {
+  const fetchPosts = async () => {
     let token = localStorage.getItem("token")
-    const result = await axios('http://localhost:3000/posts', {
+    const posts = await axios('http://localhost:3000/posts', {
       headers: {
         Authorization: token
       }
     })
-    setData(result.data.data.reverse())
-    console.log(result.data.data)
+    setPosts(posts.data.data)
+  }
+
+  const fetchComments = async () => {
+    let token = localStorage.getItem("token")
+    const getComments = await axios('http://localhost:3000/comments', {
+      headers: {
+        Authorization: token
+      }
+    })
+    setComments(getComments.data.data)
+    console.log(getComments)
   }
 
   useEffect(() => {
-    fetchData()
+    fetchPosts()
+    fetchComments()
   }, [])
 
   const loadMore = () => {
     setTimeout(() => {
       setDisplayedPosts([
         ...displayedPosts,
-        ...data.slice(
+        ...posts.slice(
           displayedPosts.length,
-          data.length > displayedPosts.length + 5
+          posts.length > displayedPosts.length + 5
             ? displayedPosts.length + 5
-            : data.length,
+            : posts.length,
         ),
       ])
     }, 500)
@@ -74,9 +86,9 @@ const Newsfeed = () => {
     <div class="news-feed">
       <button className="button" onClick={handleClick}>Create Post</button>
     <>
-      {displayedPosts.map((post, i) => (
+      {displayedPosts.map((post) => (
         
-        <div key={i} className="post">
+        <div key={post.postId} className="post">
           <div className="post__heading">
             <img src="images/no-photo.png"
               className="profile-pic"
@@ -108,13 +120,13 @@ const Newsfeed = () => {
               className="comment__author-profile-pic"
               alt="Profile Picure"
             />
-              <div>{post.commentText}</div>
+              <div>Hellooooooo</div>
             </div>
           </div>
         </div>
       ))}
 
-      {data.length > displayedPosts.length && (
+      {posts.length > displayedPosts.length && (
         <p ref={setObservedEl}>LoadMore ...</p>
       )}
     </>
