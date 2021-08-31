@@ -18,7 +18,7 @@ const Newsfeed = () => {
         Authorization: token,
       },
     })
-    setPosts(posts.data.data)
+    setPosts(posts.data.data.reverse())
   }
 
   useEffect(() => {
@@ -95,18 +95,9 @@ const Newsfeed = () => {
               ></img>
               <p className="post__text-content">{post.textContent}</p>
             </div>
-            <div className="comments-and-likes">
-              <p className="comments-and-likes__qty">
-                1 like&nbsp;&nbsp;&nbsp; 1 comment
-              </p>
-              <hr className="hr" />
-              <div className="icons__wrapper">
-                <FontAwesomeIcon icon={faThumbsUp} className={'post-icons'} />
-                <FontAwesomeIcon icon={faComment} className={'post-icons'} />
-              </div>
-              <hr className="hr" />
-              <Comment postId={post.postId} textContent={'butts'} />
-            </div>
+            
+              <Comment postId={post.postId} />
+            
           </div>
         ))}
 
@@ -132,19 +123,32 @@ function Comment(props) {
 
   useEffect(() => {
     fetchComments()
-    console.log(commentsList)
   }, [])
 
   return (
-    <div className="comment">
-      <img
+    <div className="comments-and-likes">
+              <p className="comments-and-likes__qty">
+                1 like&nbsp;&nbsp;&nbsp; 1 comment
+              </p>
+              <hr className="hr" />
+              <div className="icons__wrapper">
+                <FontAwesomeIcon icon={faThumbsUp} className={'post-icons'} />
+                <FontAwesomeIcon icon={faComment} className={'post-icons'} />
+              </div>
+              <hr className="hr" />
+    <div className="comments">
+      {commentsList.map((comment) => (
+        comment.postId === props.postId && 
+        <div key={comment.commentId} class="comment">
+          <img
         src="images/no-photo.png"
         className="comment__author-profile-pic"
         alt="Profile Picure"
       />
-      {commentsList.map((comment) => (
-        <div>{comment.commentText}</div>
+          {comment.commentText}
+          </div>
       ))}
+    </div>
     </div>
   )
 }

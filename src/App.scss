@@ -231,9 +231,10 @@ html, body {
     }
 
 
-    .comment {
+    .comments {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
       padding: 5px;
       .comment__author-profile-pic {
@@ -242,7 +243,7 @@ html, body {
         height: 30px;
         margin: 5px;
       }
-      div {
+      .comment {
         padding: 8px;
         font-size: smaller;
         border-radius: 15px;
