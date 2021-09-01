@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import '../App.scss'
+import { counter } from '@fortawesome/fontawesome-svg-core'
 
 const Newsfeed = () => {
   const [posts, setPosts] = useState([])
@@ -133,10 +134,19 @@ function Comment(props) {
     setCommentFieldOpen(true)
   }
 
+  let commentNumber = 0;
+  let commentNumberText = "Comments";
+  commentsList.forEach(function (comment) {
+    if (comment.postId === props.postId) {
+      commentNumber += 1
+      if (commentNumber === 1) {commentNumberText = "Comment"} else (commentNumberText = "Comments")
+    }
+    
+  })
+
   function onSubmit(data) {
     let token = localStorage.getItem('token')
     let userId = localStorage.getItem('userId')
-    console.log(data.textContent)
     axios
       .post(
         'http://localhost:3000/comments',
@@ -159,11 +169,13 @@ function Comment(props) {
       .catch(history.push('/error-page'))
   }
 
+
+
+  
+
   return (
     <div>
-      <p className="comments-and-likes__qty">
-        1 like&nbsp;&nbsp;&nbsp; 1 comment
-      </p>
+      <p>{commentNumber} {commentNumberText}</p>
       <hr className="hr" />
       <div className="l-icons-wrapper">
         <button className={'comments-and-likes__icons'}>
@@ -178,10 +190,15 @@ function Comment(props) {
         </button>
       </div>
       <hr className="hr" />
+
+      {/* Comment Form */}
       <div className="comments">
         {commentFieldOpen && (
           <form onSubmit={handleSubmit(onSubmit)} class="comment-form">
-            <input class="comment-input" placeholder="Type comment here" autoComplete={false}
+            <input
+              class="comment-input"
+              placeholder="Type comment here"
+              autoComplete={false}
               {...register('textContent', { required: true, minLength: 1 })}
             ></input>
           </form>
