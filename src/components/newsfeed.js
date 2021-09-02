@@ -1,11 +1,8 @@
-import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
 import '../App.scss'
-import { counter } from '@fortawesome/fontawesome-svg-core'
+import Comments from './comments.js'
 
 const Newsfeed = () => {
   const [posts, setPosts] = useState([])
@@ -69,7 +66,7 @@ const Newsfeed = () => {
   }
 
   return (
-    <div class="news-feed">
+    <div className="news-feed">
       <button className="button" onClick={handleClick}>
         Create Post
       </button>
@@ -98,7 +95,7 @@ const Newsfeed = () => {
               <p className="post__text-content">{post.textContent}</p>
             </div>
 
-            <Comment postId={post.postId} />
+            <Comments postId={post.postId} />
           </div>
         ))}
 
@@ -106,118 +103,6 @@ const Newsfeed = () => {
           <p ref={setObservedEl}>LoadMore ...</p>
         )}
       </>
-    </div>
-  )
-}
-
-function Comment(props) {
-  const history = useHistory()
-  const [commentsList, setCommentsList] = useState([])
-  const [commentFieldOpen, setCommentFieldOpen] = useState(false)
-  const { register, handleSubmit } = useForm()
-
-  const fetchComments = async () => {
-    let token = localStorage.getItem('token')
-    const comments = await axios('http://localhost:3000/comments', {
-      headers: {
-        Authorization: token,
-      },
-    })
-    setCommentsList(comments.data.data)
-  }
-
-  useEffect(() => {
-    fetchComments()
-  }, [])
-
-  function showInput() {
-    setCommentFieldOpen(true)
-  }
-
-  let commentNumber = 0;
-  let commentNumberText = "Comments";
-  commentsList.forEach(function (comment) {
-    if (comment.postId === props.postId) {
-      commentNumber += 1
-      if (commentNumber === 1) {commentNumberText = "Comment"} else (commentNumberText = "Comments")
-    }
-    
-  })
-
-  function onSubmit(data) {
-    let token = localStorage.getItem('token')
-    let userId = localStorage.getItem('userId')
-    axios
-      .post(
-        'http://localhost:3000/comments',
-        {
-          commentText: data.textContent,
-          postId: props.postId,
-          commenterId: userId,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        },
-      )
-
-      .then(function (response) {
-        console.log(response)
-        history.push('/news-feed')
-      })
-      .catch(history.push('/error-page'))
-  }
-
-
-
-  
-
-  return (
-    <div>
-      <p>{commentNumber} {commentNumberText}</p>
-      <hr className="hr" />
-      <div className="l-icons-wrapper">
-        <button className={'comments-and-likes__icons'}>
-          <FontAwesomeIcon icon={faThumbsUp} />
-        </button>
-        <button
-          type="button"
-          onClick={showInput}
-          className={'comments-and-likes__icons'}
-        >
-          <FontAwesomeIcon icon={faComment} />
-        </button>
-      </div>
-      <hr className="hr" />
-
-      {/* Comment Form */}
-      <div className="comments">
-        {commentFieldOpen && (
-          <form onSubmit={handleSubmit(onSubmit)} class="comment-form">
-            <input
-              class="comment-input"
-              placeholder="Type comment here"
-              autoComplete={false}
-              {...register('textContent', { required: true, minLength: 1 })}
-            ></input>
-          </form>
-        )}
-
-        {commentsList.map(
-          (comment) =>
-            comment.postId === props.postId && (
-              <div key={comment.commentId} class="comment-and-profile-pic">
-                <img
-                  src="images/no-photo.png"
-                  className="comment__author-profile-pic"
-                  alt="Profile Picure"
-                />
-                <div class="comment">{comment.commentText}</div>
-              </div>
-            ),
-        )}
-      </div>
     </div>
   )
 }

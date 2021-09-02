@@ -219,8 +219,15 @@ input:focus {
   }
 
 
-  .comments-and-likes__qty {
-    margin-left: 10px;
+  .l-likes-and-comments-qty {
+    display: flex;
+  }
+  .comments-qty {
+    margin-left: 20px;
+    color: $border-color;
+  }
+  .likes-qty {
+    margin-left: 20px;
     color: $border-color;
   }
   .l-icons-wrapper {
