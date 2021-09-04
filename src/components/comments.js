@@ -24,7 +24,7 @@ function Comments(props) {
     setCommentsList(comments.data.data)
   }
 
-  // Send GET upon component rendering
+  // Send GET request for all likes/comments upon component rendering
   useEffect(() => {
     fetchComments()
     fetchLikes()
@@ -53,7 +53,6 @@ function Comments(props) {
     )
     fetchLikes()
   }
-
 
   const fetchLikes = async () => {
     let token = localStorage.getItem('token')
@@ -119,6 +118,7 @@ function Comments(props) {
         history.push('/news-feed')
       })
       .catch(history.push('/error-page'))
+      fetchComments()
   }
 
   return (

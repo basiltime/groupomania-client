@@ -89,7 +89,7 @@ const Newsfeed = () => {
             <div className="post__body">
               <img
                 className="post__image"
-                src={post.imageUrl}
+                src={post.multimediaUrl}
                 alt="sample"
               ></img>
               <p className="post__text-content">{post.textContent}</p>

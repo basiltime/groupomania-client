@@ -1,35 +1,42 @@
 import { useHistory } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { useState } from 'react'
 import axios from 'axios'
 
 function CreateAccount() {
+  
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm()
+
   const [duplicateEmailError, setDuplicateEmailError] = useState(null)
   const [networkError, setNetworkError] = useState(null)
   const history = useHistory()
 
   function onSubmit(data) {
     localStorage.clear()
-
+    const form = new FormData()
+    form.append('firstName', data.firstName)
+    form.append('lastName', data.lastName)
+    form.append('email', data.email)
+    form.append('password', data.password)
+    form.append('profilePicUrl', data.profilePicUrl)
     const signupRequest = async () => {
       try {
-        const resp = await axios.post('http://localhost:3000/users/signup', {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          password: data.password,
+        const resp = await axios.post('http://localhost:3000/users/signup', 
+        form,
+        { headers:
+          {
+            'Content-Type': 'multipart/form-data',
+          },
         })
-
         localStorage.setItem('userId', resp.data.userId)
         localStorage.setItem('token', resp.data.token)
         history.push('/news-feed')
       } catch (error) {
-        console.log(error.message)
         if (error.message === 'Network Error') {
           setNetworkError(
             'Sorry, there was a problem on our end. Please try again later!',
@@ -47,7 +54,7 @@ function CreateAccount() {
       <h2 className="main__header">
         Enter your details to create a new account
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <form onSubmit={handleSubmit(onSubmit)} className="form" >
         {errors.firstName && (
           <div role="alert" className="error">
             First name is required
@@ -104,6 +111,19 @@ function CreateAccount() {
           placeholder="Password"
           aria-label="Password"
         />
+        <Controller
+          control={control}
+          name="profilePicUrl"
+          id="profilePicUrl"
+          render={({
+            field
+          }) => (
+            <input {...field} value={null} onChange={e => field.onChange(e.target.files[0])} type="file" />
+          )}
+        />
+        <label for="postImage" className="button--small">
+          Upload File
+        </label>
         <button type="submit" className="button">
           Create Account
         </button>
