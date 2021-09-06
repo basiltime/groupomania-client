@@ -4,7 +4,10 @@ import { useState } from 'react'
 import axios from 'axios'
 
 function CreateAccount() {
-  
+  const [duplicateEmailError, setDuplicateEmailError] = useState(null)
+  const [networkError, setNetworkError] = useState(null)
+
+
   const {
     register,
     handleSubmit,
@@ -12,8 +15,6 @@ function CreateAccount() {
     formState: { errors },
   } = useForm()
 
-  const [duplicateEmailError, setDuplicateEmailError] = useState(null)
-  const [networkError, setNetworkError] = useState(null)
   const history = useHistory()
 
   function onSubmit(data) {
@@ -23,10 +24,10 @@ function CreateAccount() {
     form.append('lastName', data.lastName)
     form.append('email', data.email)
     form.append('password', data.password)
-    form.append('profilePicUrl', data.profilePicUrl)
+    form.append('image', data.profilePicUrl)
     const signupRequest = async () => {
       try {
-        const resp = await axios.post('http://localhost:3000/users/signup', 
+        const resp = await axios.post('http://localhost:3000/users', 
         form,
         { headers:
           {
@@ -54,7 +55,7 @@ function CreateAccount() {
       <h2 className="main__header">
         Enter your details to create a new account
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="form" >
+      <form onSubmit={handleSubmit(onSubmit)} className="form" encType="multipart/form-data">
         {errors.firstName && (
           <div role="alert" className="error">
             First name is required
@@ -86,6 +87,7 @@ function CreateAccount() {
           className="form__input"
           placeholder="First Name"
           aria-label="First Name"
+          name="firstName"
         />
         <input
           {...register('lastName', { required: true })}
@@ -94,6 +96,7 @@ function CreateAccount() {
           className="form__input"
           placeholder="Last Name"
           aria-label="Last Name"
+          name="lastName"
         />
         <input
           {...register('email', { required: true })}
@@ -102,6 +105,7 @@ function CreateAccount() {
           className="form__input"
           placeholder="Email"
           aria-label="Email"
+          name="email"
         />
         <input
           {...register('password', { required: true })}
@@ -110,6 +114,7 @@ function CreateAccount() {
           className="form__input"
           placeholder="Password"
           aria-label="Password"
+          name="password"
         />
         <Controller
           control={control}
@@ -121,9 +126,6 @@ function CreateAccount() {
             <input {...field} value={null} onChange={e => field.onChange(e.target.files[0])} type="file" />
           )}
         />
-        <label for="postImage" className="button--small">
-          Upload File
-        </label>
         <button type="submit" className="button">
           Create Account
         </button>

@@ -12,6 +12,7 @@ function AccountWrapper() {
   const [lastName, setLastName] = useState(null)
   const [email, setEmail] = useState(null)
   const [error, setError] = useState(null)
+  const [profilePic, setProfilePic] = useState(null)
   
   const token = localStorage.getItem("token")
   const userId = localStorage.getItem('userId')
@@ -25,6 +26,7 @@ function AccountWrapper() {
       setFirstName(resp.data.firstName)
       setLastName(resp.data.lastName)
       setEmail(resp.data.email)
+      setProfilePic(resp.data.profilePicUrl)
       
     } catch(error) {
       if (error) {setError('Problem retrieving account information')}
@@ -40,7 +42,7 @@ function AccountWrapper() {
       <hr className="hr" />
       <div className="account-details">
         <img
-          src="/images/no-photo.png"
+          src={profilePic}
           alt="Profile Picure"
           className="profile-pic"
         />
