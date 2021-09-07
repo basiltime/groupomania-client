@@ -25,6 +25,9 @@ function CreateAccount() {
     form.append('email', data.email)
     form.append('password', data.password)
     form.append('image', data.profilePicUrl)
+
+
+
     const signupRequest = async () => {
       try {
         const resp = await axios.post('http://localhost:3000/users', 
