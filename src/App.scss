@@ -30,6 +30,11 @@ $comment-color: #f2f2f2;
   border-radius: 5px;
 }
 
+@mixin focus-border {
+  &:focus {
+    border: 3px solid $secondary;
+  }
+}
 @mixin button(
   $color: $secondary,
   $font-size: 18px,
@@ -47,6 +52,9 @@ $comment-color: #f2f2f2;
   margin: 15px 0px;
   height: $height;
   font-size: $font-size;
+  &:hover {
+    background: lighten($color, 5%);
+  }
 }
 
 @mixin hr {
@@ -73,6 +81,7 @@ body {
 .nav {
   position: sticky;
   top: 0;
+  z-index: 2;
   background: $secondary;
   background: linear-gradient(331deg, $secondary 12%, $primary 87%);
   padding: 20px 0px;
@@ -104,6 +113,7 @@ input:focus {
   width: 85%;
   max-width: 405px;
   .main__logo {
+    z-index: 1;
     margin: 40px;
     transform: scale(0.65, 0.65);
   }
@@ -117,9 +127,10 @@ input:focus {
     display: flex;
     flex-direction: column;
     font-size: 16px;
-
+    
     .form__input {
       @include border;
+      @include focus-border;
       padding-left: 15px;
       height: 40px;
       margin-bottom: 25px;
@@ -133,6 +144,7 @@ input:focus {
     }
     .form__textarea {
       @include border;
+      @include focus-border;
       min-height: 200px;
       resize: none;
       font-family: unset;
@@ -311,9 +323,8 @@ input:focus {
   text-align: center;
   line-height: 20px;
   border-radius: 5px;
-  margin: 15px 0px 15px 0px;
-  width: 90%;
+  margin: 10px 0px 10px 0px;
   color: $primary;
   background-color: lighten($primary, 55%);
-  padding: 20px;
+  padding: 10px;
 }
