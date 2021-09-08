@@ -162,13 +162,13 @@ input:focus {
   }
   .profile-pic {
     @include border;
+    border-radius: 50%;
     color: $box-shadow-color;
     margin: 20px 0px;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
-    object-position: 0px -10px;
     object-fit: cover;
+    object-position: 50% 50%;
   }
   .account-details {
     font-weight: 500;
@@ -253,6 +253,9 @@ input:focus {
     margin: 3px;
     color: $primary;
     font-size: 1.25em;
+    &:hover {
+      color: lighten($primary, 15%);
+    }
   }
 
   .comments {

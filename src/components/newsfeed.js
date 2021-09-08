@@ -74,8 +74,9 @@ const Newsfeed = () => {
         {displayedPosts.map((post) => (
           <div key={post.postId} className="post">
             <div className="post__heading">
+              
               <img
-                src="images/no-photo.png"
+                src={post.profilePicUrl}
                 className="profile-pic"
                 alt="Profile Picure"
               />
@@ -87,12 +88,13 @@ const Newsfeed = () => {
               </div>
             </div>
             <div className="post__body">
+            <p className="post__text-content">{post.textContent}</p>
               <img
                 className="post__image"
                 src={post.multimediaUrl}
-                alt="sample"
+                alt=""
+                aria-label="image"
               ></img>
-              <p className="post__text-content">{post.textContent}</p>
             </div>
 
             <Comments postId={post.postId} />
