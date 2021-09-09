@@ -51,8 +51,9 @@ function AccountWrapper() {
       <div className="account-details">
       <img
           src={profilePic}
-          alt="Profile Picture"
+          alt=""
           className="profile-pic"
+          aria-label="User profile picture"
         />
         {error && <div className="error"> {error} </div>}
         <p className="account-details__name">
