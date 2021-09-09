@@ -1,4 +1,5 @@
 import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
+import { faThumbsUp as solidFaThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
@@ -9,9 +10,11 @@ function Comments(props) {
   const history = useHistory()
   const [commentsList, setCommentsList] = useState([])
   const [likesList, setLikesList] = useState([])
-  const [likes, setLikes] = useState([])
   const [commentFieldOpen, setCommentFieldOpen] = useState(false)
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, setValue } = useForm()
+  let likesQty = 0
+  let likesNumberText = 'Likes'
+  let userLikes = false
 
   // GET all comments
   const fetchComments = async () => {
@@ -24,22 +27,28 @@ function Comments(props) {
     setCommentsList(comments.data.data)
   }
 
+  const fetchLikes = async () => {
+    let token = localStorage.getItem('token')
+    const likes = await axios('http://localhost:3000/likes', {
+      headers: {
+        Authorization: token,
+      },
+    })
+    setLikesList(likes.data.data)
+ // Update likes qty every time a post is liked/unliked
+  }
+
   // Send GET request for all likes/comments upon component rendering
   useEffect(() => {
     fetchComments()
     fetchLikes()
   }, [])
 
-  // Display input field to enter comments
-  function showInput() {
-    setCommentFieldOpen(true)
-  }
-
   // Send POST request on click of like button
-  function like() {
+  const like = async () => {
     let token = localStorage.getItem('token')
     let userId = localStorage.getItem('userId')
-    axios.post(
+    const likes = await axios.post(
       'http://localhost:3000/likes',
       {
         userId: userId,
@@ -51,49 +60,33 @@ function Comments(props) {
         },
       },
     )
-    fetchLikes()
-  }
-
-  const fetchLikes = async () => {
-    let token = localStorage.getItem('token')
-    const likes = await axios('http://localhost:3000/likes', {
-      headers: {
-        Authorization: token,
-      },
-    })
     setLikesList(likes.data.data)
-    getLikesNumber() // Update likes qty every time a post is liked/unliked
   }
-
-  // Display number of comments for the post
-  let commentNumber = 0
-  let commentNumberText = 'Comments'
-  commentsList.forEach(function (comment) {
-    if (comment.postId === props.postId) {
-      commentNumber += 1
-      if (commentNumber === 1) {
-        commentNumberText = 'Comment'
-      } else commentNumberText = 'Comments'
-    }
-  })
-
+  
   // Set quantity of likes for the post 
-  function getLikesNumber() {
-  let likesQty = 0
-  let likesNumberText = 'Likes'
   likesList.forEach(function (like) {
       if (like.postId === props.postId) {
           likesQty += 1
+          if (like.userId == localStorage.getItem('userId')) {
+            userLikes = true
+          } else { userLikes = false }
           if (likesQty === 1) {
             likesNumberText = 'Like'
           } else likesNumberText = 'Likes'
       }
   })
-  let likesString = `${likesQty} ${likesNumberText}`
-  setLikes(likesString) 
-  
-}
 
+// Display number of comments for the post
+let commentNumber = 0
+let commentNumberText = 'Comments'
+commentsList.forEach(function (comment) {
+  if (comment.postId === props.postId) {
+    commentNumber += 1
+    if (commentNumber === 1) {
+      commentNumberText = 'Comment'
+    } else commentNumberText = 'Comments'
+  }
+})
 
   // POST request for comments
   function onSubmit(data) {
@@ -117,31 +110,47 @@ function Comments(props) {
         console.log(response)
         history.push('/news-feed')
       })
-      .catch(history.push('/error-page'))
+      .catch(console.log('Something went wrong'))
+      setValue('textContent', '')
       fetchComments()
   }
+
+    // Display input field to enter comments
+    function showInput() {
+      setCommentFieldOpen(true)
+    }
 
   return (
     <div>
       <div className="l-likes-and-comments-qty">
-        <p className="likes-qty">{likes}</p>
+        <p className="likes-qty">{likesQty} {likesNumberText}</p>
         <p className="comments-qty">
             {commentNumber} {commentNumberText}</p>
       </div>
       <hr className="hr" />
       <div className="l-icons-wrapper">
+
+        {userLikes ? (<button
+          type="button"
+          onClick={like}
+          className='comments-and-likes__icons like'
+        >
+          <FontAwesomeIcon icon={solidFaThumbsUp} />
+        </button>) : (
         <button
           type="button"
           onClick={like}
-          className={'comments-and-likes__icons'}
+          className='comments-and-likes__icons like'
         >
           <FontAwesomeIcon icon={faThumbsUp} />
-        </button>
+        </button> 
+        )}
+
 
         <button
           type="button"
           onClick={showInput}
-          className={'comments-and-likes__icons'}
+          className='comments-and-likes__icons comment'
         >
           <FontAwesomeIcon icon={faComment} />
         </button>
@@ -165,7 +174,7 @@ function Comments(props) {
             comment.postId === props.postId && (
               <div key={comment.commentId} className="comment-and-profile-pic">
                 <img
-                  src="images/no-photo.png"
+                  src={comment.profilePicUrl}
                   className="comment__author-profile-pic"
                   alt="Profile Picure"
                 />

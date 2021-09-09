@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -13,9 +14,11 @@ function AccountWrapper() {
   const [email, setEmail] = useState(null)
   const [error, setError] = useState(null)
   const [profilePic, setProfilePic] = useState(false)
-  
   const token = localStorage.getItem("token")
   const userId = localStorage.getItem('userId')
+
+
+ 
   const userData = async () => {
     try {
       const resp = await axios.get(`http://localhost:3000/users/${userId}`, {
@@ -33,8 +36,11 @@ function AccountWrapper() {
       if (error) {setError('Problem retrieving account information')}
     }
   }
-  userData()
 
+  useEffect(() => {
+    userData()
+  }, [])
+  
   
   return (
     

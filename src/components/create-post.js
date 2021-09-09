@@ -47,7 +47,7 @@ function CreatePost() {
         console.log(response)
         history.push('/news-feed')
       })
-      .catch(history.push('/error-page'))
+      .catch(console.log('Something went wrong'))
   }
 
   return (

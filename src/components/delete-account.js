@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import axios from 'axios'
 
 
@@ -43,7 +43,7 @@ function DeleteAccount() {
       <br />
       <br />
       <button type="submit" className="button--small" onClick={handleRemoveAccount}>YES, DELETE MY ACCOUNT</button>
-      <button className="button--small">Cancel</button>
+      <Link to="/news-feed" className="button--small">Cancel </Link>
   
     </div>)
   }
