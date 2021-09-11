@@ -172,14 +172,20 @@ commentsList.forEach(function (comment) {
         {commentsList.map(
           (comment) =>
             comment.postId === props.postId && (
-              <div key={comment.commentId} className="comment-and-profile-pic">
+              <div key={comment.commentId} className="comment">
+                
                 <img
                   src={comment.profilePicUrl}
-                  className="comment__author-profile-pic"
+                  className="comment-profile-pic"
                   alt="Profile Picure"
                 />
-                <div className="comment">{comment.commentText}</div>
-              </div>
+                
+                <div className="comment-text">
+                  <div><strong>{comment.firstName} {comment.lastName}</strong>
+                  </div>
+                  <div>{comment.commentText}</div>
+                  </div>
+                </div>
             ),
         )}
       </div>

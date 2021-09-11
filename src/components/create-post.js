@@ -1,8 +1,10 @@
 import { useForm, Controller } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
 import axios from 'axios'
 
 function CreatePost() {
+  const [imgPreview, setImgPreview] = useState(null)
   const {
     register,
     handleSubmit,
@@ -23,7 +25,6 @@ function CreatePost() {
     })
     
     let timestamp = `${date} at ${time}`
-    console.log(data)
     const form = new FormData()
     form.append('textContent', data.textContent)
     form.append('timestamp', timestamp)
@@ -72,6 +73,9 @@ function CreatePost() {
           placeholder="Start typing..."
           aria-label="Create Post"
         />
+        <img src={imgPreview} className="img-preview"/>
+        <div className="btn-file-input">
+        
         <Controller
           control={control}
           name="postImage"
@@ -79,9 +83,11 @@ function CreatePost() {
           render={({
             field
           }) => (
-            <input {...field} value={null} onChange={e => field.onChange(e.target.files[0])} type="file" />
+            <input {...field} value={null} onChange={e => field.onChange(e.target.files[0], setImgPreview(URL.createObjectURL(e.target.files[0])))} type="file" />
           )}
         />
+        Upload Post Image
+        </div>
         <hr className="hr" />
         <button className="button" type="submit">
           Create Post

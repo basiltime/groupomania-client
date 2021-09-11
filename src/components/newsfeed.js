@@ -93,7 +93,7 @@ const Newsfeed = () => {
                 className="post__image"
                 src={post.multimediaUrl}
                 alt=""
-                aria-label="image"
+                aria-label="Post image"
               ></img>
             </div>
 

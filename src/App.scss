@@ -122,6 +122,25 @@ input:focus {
     text-align: center;
     width: 100%;
   }
+
+  .btn-file-input {
+    @include button;
+    
+   
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid black;
+    
+  }
+  .btn-file-input > input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    width: 100%;
+  }
+
   .form {
     width: 100%;
     display: flex;
@@ -135,9 +154,7 @@ input:focus {
       height: 40px;
       margin-bottom: 25px;
       font-size: 16px;
-      &[type='file'] {
-        display: none;
-      }
+      
     }
     .form__input:nth-of-type(1) {
       margin-top: 25px;
@@ -157,6 +174,10 @@ input:focus {
     }
   }
 
+  .img-preview {
+    max-height: 300px;
+    object-fit: cover;
+  }
   .hr {
     @include hr;
   }
@@ -205,8 +226,8 @@ input:focus {
 
     .profile-pic {
       margin: 15px;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
     }
 
@@ -264,24 +285,23 @@ input:focus {
     flex-wrap: wrap;
     align-items: center;
     padding: 5px;
-    .comment__author-profile-pic {
+    .comment-profile-pic {
       border-radius: 50%;
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       margin: 5px;
     }
-    .comment-and-profile-pic {
+    .l-flex-row {
+      @include flex-column-center()
+    }
+    .comment {
       width: 100%;
       display: flex;
       flex-direction: row;
     }
-    .comment {
-      width: fit-content;
-      padding: 8px;
-      font-size: smaller;
-      border-radius: 15px;
-      background-color: $comment-color;
-      margin: 5px;
+  
+    .comment-author {
+      font-size: 13px;
     }
   }
 }
@@ -298,6 +318,18 @@ input:focus {
       
 }
 
+.comment-text {
+      
+  width: fit-content;
+  padding: 5px 9px;
+  font-size: smaller;
+  border-radius: 15px;
+  background-color: $comment-color;
+  margin: 5px;
+ & div {
+   margin: 4px;
+ }
+}
 
 
 .button {

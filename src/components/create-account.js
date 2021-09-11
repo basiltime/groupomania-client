@@ -6,7 +6,7 @@ import axios from 'axios'
 function CreateAccount() {
   const [duplicateEmailError, setDuplicateEmailError] = useState(null)
   const [networkError, setNetworkError] = useState(null)
-
+  const [imgPreview, setImgPreview] = useState(null)
 
   const {
     register,
@@ -26,14 +26,10 @@ function CreateAccount() {
     form.append('password', data.password)
     form.append('image', data.profilePicUrl)
 
-
-
     const signupRequest = async () => {
       try {
-        const resp = await axios.post('http://localhost:3000/users', 
-        form,
-        { headers:
-          {
+        const resp = await axios.post('http://localhost:3000/users', form, {
+          headers: {
             'Content-Type': 'multipart/form-data',
           },
         })
@@ -53,12 +49,17 @@ function CreateAccount() {
     signupRequest()
   }
 
+
   return (
     <main className="main">
       <h2 className="main__header">
         Enter your details to create a new account
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="form" encType="multipart/form-data">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="form"
+        encType="multipart/form-data"
+      >
         {errors.firstName && (
           <div role="alert" className="error">
             First name is required
@@ -119,16 +120,25 @@ function CreateAccount() {
           aria-label="Password"
           name="password"
         />
-        <Controller
-          control={control}
-          name="profilePicUrl"
-          id="profilePicUrl"
-          render={({
-            field
-          }) => (
-            <input {...field} value={null} onChange={e => field.onChange(e.target.files[0])} type="file" />
-          )}
-        />
+
+        <img src={imgPreview} className="img-preview"/>
+        <div className="btn-file-input">
+          <Controller
+            control={control}
+            name="profilePicUrl"
+            id="profilePicUrl"
+            render={({ field }) => (
+              <input
+                {...field}
+                value={null}
+                onChange={(e) => field.onChange(e.target.files[0], setImgPreview(URL.createObjectURL(e.target.files[0])))}
+                type="file"
+              />
+            )}
+          />
+            Upload Profile Picture
+        </div>
+
         <button type="submit" className="button">
           Create Account
         </button>
