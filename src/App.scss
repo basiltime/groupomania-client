@@ -232,6 +232,8 @@ input:focus {
       margin: 15px;
       width: 50px;
       height: 50px;
+      object-fit: cover;
+      object-position: 50% 50%;
       border-radius: 50%;
     }
     .post__author {
@@ -289,6 +291,8 @@ input:focus {
       border-radius: 50%;
       width: 35px;
       height: 35px;
+      object-fit: cover;
+      object-position: 50% 50%;
       margin: 5px;
     }
     .l-flex-row {

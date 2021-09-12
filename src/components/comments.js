@@ -185,7 +185,7 @@ commentsList.forEach(function (comment) {
                 <div className="comment-text">
                   <div><strong>{comment.firstName} {comment.lastName}</strong>
                   </div>
-                  <div>{comment.commentText}</div>
+                  <div class="comment-content">{comment.commentText}</div>
                   </div>
                 </div>
             ),
