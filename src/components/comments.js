@@ -134,6 +134,7 @@ commentsList.forEach(function (comment) {
           type="button"
           onClick={like}
           className='comments-and-likes__icons liked'
+          aria-label='Remove Like'
         >
           <FontAwesomeIcon icon={solidFaThumbsUp} />
         </button>) : (
@@ -141,6 +142,7 @@ commentsList.forEach(function (comment) {
           type="button"
           onClick={like}
           className='comments-and-likes__icons not-liked'
+          aria-label='Like'
         >
           <FontAwesomeIcon icon={faThumbsUp} />
         </button> 
@@ -151,6 +153,7 @@ commentsList.forEach(function (comment) {
           type="button"
           onClick={showInput}
           className='comments-and-likes__icons commentIcon'
+          aria-label='Write Comment'
         >
           <FontAwesomeIcon icon={faComment} />
         </button>

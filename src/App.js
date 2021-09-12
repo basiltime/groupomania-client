@@ -34,7 +34,7 @@ function accountClick() {
   return ( 
     <div id="app"> 
     <nav className="nav">
-    <Link onClick={homeClick}><img className="nav__logo" src={logo} aria-label="Home" alt="logo" /></Link>
+    <Link onClick={homeClick}><img className="nav__logo" src={logo} aria-label="Home" alt="Home" /></Link>
     <Link onClick={accountClick} className="nav__icon" aria-label="My Account"><FontAwesomeIcon icon="user" color="white" aria-hidden="true" /></Link>
     </nav>
           <Switch>

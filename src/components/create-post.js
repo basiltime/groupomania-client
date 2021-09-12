@@ -73,9 +73,9 @@ function CreatePost() {
           placeholder="Start typing..."
           aria-label="Create Post"
         />
-        <img src={imgPreview} className="img-preview"/>
-        <div className="btn-file-input">
+        <img src={imgPreview} aria-label="Upload Preview" className="img-preview"/>
         
+        <div className="btn-file-input">
         <Controller
           control={control}
           name="postImage"
@@ -83,7 +83,7 @@ function CreatePost() {
           render={({
             field
           }) => (
-            <input {...field} value={null} onChange={e => field.onChange(e.target.files[0], setImgPreview(URL.createObjectURL(e.target.files[0])))} type="file" />
+            <input {...field} value={null} onChange={e => field.onChange(e.target.files[0], setImgPreview(URL.createObjectURL(e.target.files[0])))} type="file" aria-label="Upload Image" />
           )}
         />
         Upload Post Image
