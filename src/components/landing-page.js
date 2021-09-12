@@ -8,7 +8,7 @@ function LandingPage() {
   return (
     <main className="main">
       <img className="main__logo" src="/black-logo.svg" alt="logo" />
-      <h2 className="main__header">Log in to your account</h2>
+      <h2 className="main__header" aria-level="1">Log in to your account</h2>
       {LoginForm()}
       <p>Or</p>
       {CreateNewAccountButton()}

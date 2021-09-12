@@ -58,7 +58,7 @@ function CreatePost() {
         className="form"
         encType="multipart/form-data"
       >
-        <h2 className="main__header">Create Post</h2>
+        <h2 className="main__header" aria-level="1">Create Post</h2>
         {errors.textContent && (
           <div role="alert" className="error">
             Post cannot be empty

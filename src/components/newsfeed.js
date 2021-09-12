@@ -66,7 +66,8 @@ const Newsfeed = () => {
   }
 
   return (
-    <div className="news-feed">
+    <div className="news-feed" role="main">
+      <h2 aria-level="1">Newsfeed</h2>
       <button className="button" onClick={handleClick}>
         Create Post
       </button>
@@ -81,7 +82,7 @@ const Newsfeed = () => {
                 alt="Profile Picure"
               />
               <div className="l-post-author+timestamp">
-                <h3 className="post__author">
+                <h3 aria-level="2"className="post__author">
                   {post.firstName} {post.lastName}
                 </h3>
                 <p className="post__timestamp">{post.timestamp}</p>

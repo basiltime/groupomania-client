@@ -52,7 +52,7 @@ function CreateAccount() {
 
   return (
     <main className="main">
-      <h2 className="main__header">
+      <h2 className="main__header" aria-level="1">
         Enter your details to create a new account
       </h2>
       <form
@@ -121,7 +121,7 @@ function CreateAccount() {
           name="password"
         />
 
-        <img src={imgPreview} className="img-preview"/>
+        <img src={imgPreview} className="img-preview" aria-label="Image Preview"/>
         <div className="btn-file-input">
           <Controller
             control={control}
@@ -133,6 +133,7 @@ function CreateAccount() {
                 value={null}
                 onChange={(e) => field.onChange(e.target.files[0], setImgPreview(URL.createObjectURL(e.target.files[0])))}
                 type="file"
+                aria-label="Upload Profile Picture"
               />
             )}
           />
