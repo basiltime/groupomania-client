@@ -56,9 +56,9 @@ function AccountWrapper() {
           aria-label="User profile picture"
         />
         {error && <div className="error"> {error} </div>}
-        <p className="account-details__name">
+        <p className="account-details__name"><strong>
           {firstName} {lastName}{' '}
-        </p>
+        </strong></p>
         <p className="account-details__email">{email}</p>
         <p className="account-details__password"></p>
       </div>
@@ -74,7 +74,7 @@ function AccountWrapper() {
 
 function DeleteAccountButton() {
   return (
-    <Link to="/delete-account" className="button--warning">
+    <Link to="/delete-account" className="button">
       <p>
         Delete Account&nbsp;&nbsp;
         <FontAwesomeIcon icon={faTrash} className={'trash-icon'} />

@@ -82,7 +82,7 @@ function LoginForm() {
 function CreateNewAccountButton() {
   return (
     <div>
-      <Link to="/create-account" className="button--small">
+      <Link to="/create-account" className="button">
         Create New Account
       </Link>
     </div>

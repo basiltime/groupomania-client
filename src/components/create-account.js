@@ -122,7 +122,7 @@ function CreateAccount() {
         />
 
         <img src={imgPreview} className="img-preview" aria-label="Image Preview"/>
-        <div className="btn-file-input">
+        <div className="button-file-input button">
           <Controller
             control={control}
             name="profilePicUrl"

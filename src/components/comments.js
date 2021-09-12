@@ -108,7 +108,7 @@ commentsList.forEach(function (comment) {
 
       .then(function (response) {
         console.log(response)
-        history.push('/news-feed')
+        setCommentFieldOpen(false)
       })
       .catch(console.log('Something went wrong'))
       setValue('textContent', '')
@@ -117,7 +117,9 @@ commentsList.forEach(function (comment) {
 
     // Display input field to enter comments
     function showInput() {
-      setCommentFieldOpen(true)
+      if (commentFieldOpen === false) {
+      setCommentFieldOpen(true) 
+      } else {setCommentFieldOpen(false)}
     }
 
   return (
@@ -147,8 +149,6 @@ commentsList.forEach(function (comment) {
           <FontAwesomeIcon icon={faThumbsUp} />
         </button> 
         )}
-
-
         <button
           type="button"
           onClick={showInput}
@@ -158,7 +158,6 @@ commentsList.forEach(function (comment) {
           <FontAwesomeIcon icon={faComment} />
         </button>
       </div>
-      <hr className="hr" />
 
       <div className="comments">
         {commentFieldOpen && (

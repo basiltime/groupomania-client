@@ -2,14 +2,14 @@ $primary: #8c089d;
 $secondary: #1f25b4;
 $warning: #8e045e;
 $dark: #3c323d;
-$border-color: #707070;
+$border-color: #323232;
 $box-shadow-color: #cecece;
 $comment-color: #f2f2f2;
 
 // Classes beginning with .l- are wrappers used for layout purposes only,
-// they do not apply styles.
+// they do not apply any other styles.
 
-
+// Mixins
 @mixin flex-column-center {
   display: flex;
   flex-direction: column;
@@ -25,9 +25,9 @@ $comment-color: #f2f2f2;
 }
 
 @mixin border($border-color: $border-color) {
-  border: 1px solid $border-color;
-  box-shadow: 2px 2px 2px $box-shadow-color;
-  border-radius: 5px;
+  border: 1.75px solid $border-color;
+  box-shadow: 4px 4px 4px $box-shadow-color;
+  border-radius: 10px;
 }
 
 @mixin focus-border {
@@ -35,25 +35,29 @@ $comment-color: #f2f2f2;
     border: 3px solid $secondary;
   }
 }
-@mixin button(
-  $color: $secondary,
-  $font-size: 18px,
-  $height: 40px,
-  $padding: 0px 25px
-) {
+
+@mixin button {
   @include flex-column-center;
-  @include border($border-color: $dark);
-  padding: $padding;
+  @include border;
+  transition: all 0.2s ease-in-out;
+  background-image: linear-gradient(to right, $primary, $secondary);
+  background-size: 200% 100%;
+  font-size: 15px;
+  box-shadow: 4px 4px 4px $box-shadow-color;
+  border: none;
+  border-radius: 12px;
+  box-shadow: none;
+  padding: 0px 25px;
   color: white;
   text-decoration: none;
-  background-color: $color;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   margin: 15px 0px;
-  height: $height;
-  font-size: $font-size;
+  height: 40px;
   &:hover {
-    background: lighten($color, 5%);
+    background-position: 100% 0;
+    transition: all 0.2s ease-in-out;
+    background-image: linear-gradient(to right, $primary, $secondary);
   }
 }
 
@@ -65,6 +69,7 @@ $comment-color: #f2f2f2;
   width: 100%;
 }
 
+// Document Styling
 html,
 body {
   min-height: 100%;
@@ -78,6 +83,11 @@ body {
   font-family: sans-serif;
 }
 
+.button {
+  @include button();
+}
+
+//Components
 .nav {
   position: sticky;
   top: 0;
@@ -104,14 +114,13 @@ input:focus {
   outline: none !important;
 }
 
-
 .main {
   @include flex-column-center;
   @include border;
   margin: 60px 0px;
   padding: 15px;
   width: 85%;
-  max-width: 405px;
+  max-width: 375px;
   .main__logo {
     z-index: 1;
     margin: 40px;
@@ -122,18 +131,14 @@ input:focus {
     text-align: center;
     width: 100%;
   }
-
-  .btn-file-input {
+  .button-file-input {
     @include button;
-    
-   
     height: 40px;
     overflow: hidden;
     position: relative;
-    border: 1px solid black;
-    
   }
-  .btn-file-input > input[type="file"] {
+  .button-file-input > input[type='file'] {
+    height: 40px;
     position: absolute;
     top: 0;
     right: 0;
@@ -146,7 +151,6 @@ input:focus {
     display: flex;
     flex-direction: column;
     font-size: 16px;
-    
     .form__input {
       @include border;
       @include focus-border;
@@ -154,7 +158,6 @@ input:focus {
       height: 40px;
       margin-bottom: 25px;
       font-size: 16px;
-      
     }
     .form__input:nth-of-type(1) {
       margin-top: 25px;
@@ -182,7 +185,7 @@ input:focus {
     @include hr;
   }
   .profile-pic {
-    @include border;
+    border: 2px solid $border-color;
     border-radius: 50%;
     color: $box-shadow-color;
     margin: 20px 0px;
@@ -205,63 +208,59 @@ input:focus {
   }
 }
 
-.news-feed {
+.newsfeed {
   @include flex-column-center;
   border: none;
   box-shadow: none;
+  padding: 20px;
   & button {
-    margin-top: 60px;
+    margin: 20px 20px !important;
   }
 }
-.post {
-  @include border;
-  margin: 40px 0px;
-  max-width: 405px;
-  width: 100%;
 
+.post {
+  margin: 10px 0px;
+  width: 100%;
+  width: 375px;
+  border-radius: 10px;
   .post__heading {
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: center;
-
     .profile-pic {
       margin: 15px;
       width: 50px;
       height: 50px;
       border-radius: 50%;
     }
-
     .post__author {
       margin: 0;
     }
-
     .post__timestamp {
       margin: 0;
       color: $border-color;
     }
   }
 
-  .post__body {
-    .post__image {
-      width: 100%;
-      object-fit: cover;
-    }
-    .post__text-content {
-      margin: 5px 10px;
-    }
+  .post__image {
+    max-height: 275px;
+    object-fit: cover;
   }
-
+  .post__text-content {
+    margin: 5px 10px;
+  }
 
   .l-likes-and-comments-qty {
     display: flex;
   }
   .comments-qty {
-    margin-left: 20px;
-    color: $border-color;
+    margin-left: 10px;
+    color: lighten($border-color, 30%);
   }
   .likes-qty {
-    margin-left: 20px;
-    color: $border-color;
+    margin-left: 10px;
+    color: lighten($border-color, 30%);
   }
   .l-icons-wrapper {
     display: flex;
@@ -271,11 +270,12 @@ input:focus {
   .comments-and-likes__icons {
     border-style: none;
     background-color: #ffffff;
-    margin: 3px;
-    color: $primary;
+    color: $secondary;
     font-size: 1.25em;
+    margin: 5px !important;
     &:hover {
-      color: lighten($primary, 15%);
+      color: lighten($secondary, 10%);
+      transform: scale(1.05);
     }
   }
 
@@ -292,14 +292,14 @@ input:focus {
       margin: 5px;
     }
     .l-flex-row {
-      @include flex-column-center()
+      @include flex-column-center();
     }
     .comment {
       width: 100%;
       display: flex;
       flex-direction: row;
     }
-  
+
     .comment-author {
       font-size: 13px;
     }
@@ -308,58 +308,44 @@ input:focus {
 .comment-form {
   width: 100%;
   @include flex-column-center();
-  margin: 0px 10px 25px 10px;
+  margin: 5px 15px 25px 15px;
 }
 .comment-input {
   @include border;
-      width: 100%;
-      height: 30px;
-      padding-left: 10px;
-      
+  box-shadow: 2px 2px 2px $box-shadow-color;
+  border-radius: 6px;
+  width: 100%;
+  height: 30px;
+  padding-left: 10px;
 }
 
 .comment-text {
-      
   width: fit-content;
   padding: 5px 9px;
   font-size: smaller;
   border-radius: 15px;
   background-color: $comment-color;
   margin: 5px;
- & div {
-   margin: 4px;
- }
+  & div {
+    margin: 4px;
+  }
 }
 
-
-.button {
-  @include button();
-}
-.button--small {
-  @include button(
-    $color: $primary,
-    $font-size: 15px,
-    $height: 35px,
-    $padding: 0px 15px
-  );
-}
-
-.button--warning {
-  @include button(
-    $color: $warning,
-    $font-size: 15px,
-    $height: 35px,
-    $padding: 0px 15px
-  );
+.l-delete-account {
+  @include flex-column-center();
 }
 
 .error {
   @include flex-column-center;
   text-align: center;
   line-height: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin: 10px 0px 10px 0px;
   color: $primary;
   background-color: lighten($primary, 55%);
   padding: 10px;
+}
+
+.text-center {
+  text-align: center;
 }

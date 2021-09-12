@@ -35,17 +35,20 @@ function DeleteAccount() {
 
 
     return ( <div className="main">
+      
+      <h3 class="text-center" aria-level="1">
       Are you sure you want to delete your Grouponania account?
+      </h3>
       <br />
       <br />
       <strong>This is permanent and cannot be undone.</strong>
       <br />
       <br />
       <br />
-      <button type="submit" className="button--small" onClick={handleRemoveAccount}>YES, DELETE MY ACCOUNT</button>
-      <Link to="/news-feed" className="button--small">Cancel </Link>
-  
-    </div>)
+      <button type="submit" className="button" onClick={handleRemoveAccount}>YES, DELETE MY ACCOUNT</button>
+      <Link to="/news-feed" className="button">Cancel </Link>
+      </div>
+    )
   }
 
   export default DeleteAccount

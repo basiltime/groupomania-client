@@ -75,7 +75,7 @@ function CreatePost() {
         />
         <img src={imgPreview} aria-label="Upload Preview" className="img-preview"/>
         
-        <div className="btn-file-input">
+        <div className="button-file-input button">
         <Controller
           control={control}
           name="postImage"

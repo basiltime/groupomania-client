@@ -66,11 +66,10 @@ const Newsfeed = () => {
   }
 
   return (
-    <div className="news-feed" role="main">
-      <h2 aria-level="1">Newsfeed</h2>
-      <button className="button" onClick={handleClick}>
-        Create Post
-      </button>
+    <div className="newsfeed" role="main">
+        <button className="button" onClick={handleClick}>
+          Create Post
+        </button>
       <>
         {displayedPosts.map((post) => (
           <div key={post.postId} className="post">
