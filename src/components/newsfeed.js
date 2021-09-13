@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import '../App.scss'
 import Comments from './comments.js'
 
+
 const Newsfeed = () => {
   const [posts, setPosts] = useState([])
   const firstDisplay = posts.slice(0, 5)

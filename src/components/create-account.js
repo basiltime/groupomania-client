@@ -2,11 +2,13 @@ import { useHistory } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { useState } from 'react'
 import axios from 'axios'
+import LoadingSpinner from './loading-spinner'
 
 function CreateAccount() {
   const [duplicateEmailError, setDuplicateEmailError] = useState(null)
   const [networkError, setNetworkError] = useState(null)
   const [imgPreview, setImgPreview] = useState(null)
+  const [isLoading, setIsLoading] = useState(null)
 
   const {
     register,
@@ -28,6 +30,7 @@ function CreateAccount() {
 
     const signupRequest = async () => {
       try {
+        setIsLoading(true)
         const resp = await axios.post('http://localhost:3000/users', form, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -51,6 +54,8 @@ function CreateAccount() {
 
 
   return (
+    <div>
+    {isLoading ? ( <LoadingSpinner />) : (
     <main className="main">
       <h2 className="main__header" aria-level="1">
         Enter your details to create a new account
@@ -143,8 +148,8 @@ function CreateAccount() {
         <button type="submit" className="button">
           Create Account
         </button>
-      </form>
-    </main>
+      </form> </main>)}
+    </div> 
   )
 }
 

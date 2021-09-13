@@ -2,9 +2,11 @@ import { useForm, Controller } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
+import LoadingSpinner from './loading-spinner'
 
 function CreatePost() {
   const [imgPreview, setImgPreview] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -15,7 +17,7 @@ function CreatePost() {
   const history = useHistory()
 
   function onSubmit(data) {
-
+    setIsLoading(true)
     const userId = localStorage.getItem('userId')
     const token = localStorage.getItem('token')
     let date = new Date().toLocaleDateString()
@@ -52,7 +54,9 @@ function CreatePost() {
   }
 
   return (
-    <main className="main create-post">
+    <div>
+    {isLoading ? ( <LoadingSpinner />) : (
+    <main className="main">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="form"
@@ -93,7 +97,8 @@ function CreatePost() {
           Create Post
         </button>
       </form>
-    </main>
+    </main> )}
+    </div>
   )
 }
 
