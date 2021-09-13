@@ -19,7 +19,7 @@ describe('End to End Test', () => {
     cy.url().should('include', '/create-account')
     cy.get('.form').should('be.visible').find('.form__input').eq(0).type('John')
     cy.get('.form').find('.form__input').eq(1).type('Doe')
-    cy.get('.form').find('.form__input').eq(2).type('saaaaample@email.com')
+    cy.get('.form').find('.form__input').eq(2).type('bbbbob@email.com')
     cy.get('.form').find('.form__input').eq(3).type('1234567890')
     // ***** ADD ASSERTION FOR CHOOSE PROFILE PICTURE BUTTON ********
     cy.contains('Create Account').should('be.visible').click()
@@ -39,7 +39,7 @@ describe('End to End Test', () => {
     cy.get('.main__header').should('have.text', 'Log in to your account')
 
     // Log Back In
-    cy.get('.form').should('be.visible').find('.form__input').eq(0).type('saaaaample@email.com')
+    cy.get('.form').should('be.visible').find('.form__input').eq(0).type('bbbbob@email.com')
     cy.get('.form').should('be.visible').find('.form__input').eq(1).type('1234567890')
     cy.contains('Log In').should('be.visible').click()
 
@@ -50,6 +50,7 @@ describe('End to End Test', () => {
     cy.get('button').should('be.visible').click()
 
     // Add a Comment
+    cy.wait(5000)
     cy.get('.commentIcon').first().should('be.visible').click()
     cy.get('.comment-form').find('.comment-input').type('This is my test comment!{enter}').wait(1000)
     cy.get('.comment-content').first().should('have.text', 'This is my test comment!')

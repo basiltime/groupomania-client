@@ -41,10 +41,12 @@ function CreateAccount() {
         history.push('/news-feed')
       } catch (error) {
         if (error.message === 'Network Error') {
+          setIsLoading(false)
           setNetworkError(
             'Sorry, there was a problem on our end. Please try again later!',
           )
         } else if (error.response.status === 409) {
+          setIsLoading(false)
           setDuplicateEmailError('Duplicate email address')
         }
       }
