@@ -21,7 +21,7 @@ function AccountWrapper() {
  
   const userData = async () => {
     try {
-      const resp = await axios.get(`http://localhost:3000/users/${userId}`, {
+      const resp = await axios.get(`https://groupomania2.herokuapp.com/users/${userId}`, {
         headers: {
           Authorization: token,
         },

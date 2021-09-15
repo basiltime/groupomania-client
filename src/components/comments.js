@@ -19,7 +19,7 @@ function Comments(props) {
   // GET all comments
   const fetchComments = async () => {
     let token = localStorage.getItem('token')
-    const comments = await axios('http://localhost:3000/comments', {
+    const comments = await axios('https://groupomania2.herokuapp.com/comments', {
       headers: {
         Authorization: token,
       },
@@ -29,7 +29,7 @@ function Comments(props) {
 
   const fetchLikes = async () => {
     let token = localStorage.getItem('token')
-    const likes = await axios('http://localhost:3000/likes', {
+    const likes = await axios('https://groupomania2.herokuapp.com/likes', {
       headers: {
         Authorization: token,
       },
@@ -49,7 +49,7 @@ function Comments(props) {
     let token = localStorage.getItem('token')
     let userId = localStorage.getItem('userId')
     const likes = await axios.post(
-      'http://localhost:3000/likes',
+      'https://groupomania2.herokuapp.com/likes',
       {
         userId: userId,
         postId: props.postId,
@@ -93,7 +93,7 @@ commentsList.forEach(function (comment) {
     let token = localStorage.getItem('token')
     let userId = localStorage.getItem('userId')
     axios.post(
-        'http://localhost:3000/comments',
+        'https://groupomania2.herokuapp.com/comments',
         {
           commentText: data.textContent,
           postId: props.postId,

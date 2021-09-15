@@ -29,7 +29,7 @@ function LoginForm() {
     localStorage.clear()
     const loginRequest = async () => {
       try {
-        const resp = await axios.post('http://localhost:3000/users/login', {
+        const resp = await axios.post('https://groupomania2.herokuapp.com/users/login', {
           email: data.email,
           password: data.password,
         })
