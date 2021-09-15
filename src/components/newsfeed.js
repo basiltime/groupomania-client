@@ -13,7 +13,7 @@ const Newsfeed = () => {
 
   const fetchPosts = async () => {
     let token = localStorage.getItem('token')
-    const posts = await axios('http://localhost:3000/posts', {
+    const posts = await axios('https://groupomania2.herokuapp.com/posts', {
       headers: {
         Authorization: token,
       },

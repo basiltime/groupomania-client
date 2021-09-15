@@ -14,7 +14,7 @@ function DeleteAccount() {
     const deleteAcct = async () => {
     
     try {
-    await axios.delete(`http://localhost:3000/users/${userId}`, {
+    await axios.delete(`https://groupomania2.herokuapp.com/users/${userId}`, {
       headers: {
         Authorization: token,
       }

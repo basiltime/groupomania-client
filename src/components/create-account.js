@@ -31,7 +31,7 @@ function CreateAccount() {
     const signupRequest = async () => {
       try {
         setIsLoading(true)
-        const resp = await axios.post('http://localhost:3000/users', form, {
+        const resp = await axios.post('https://groupomania2.herokuapp.com/users', form, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

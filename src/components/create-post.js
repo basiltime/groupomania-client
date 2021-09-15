@@ -34,7 +34,7 @@ function CreatePost() {
     form.append('userId', userId)
     axios
       .post(
-        'http://localhost:3000/posts',
+        'https://groupomania2.herokuapp.com/posts',
         
           form,
         
