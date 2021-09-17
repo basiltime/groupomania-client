@@ -106,14 +106,16 @@ commentsList.forEach(function (comment) {
         },
       )
 
-      .then(function (response) {
+      .then(response =>  {
         console.log(response)
         setCommentFieldOpen(false)
         fetchComments()
       })
-      .catch(console.log('Something went wrong'))
+      .catch(error => {
+      console.log(error.response)
       setValue('textContent', '')
       fetchComments()
+      })
   }
 
     // Display input field to enter comments
