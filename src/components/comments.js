@@ -88,7 +88,7 @@ commentsList.forEach(function (comment) {
   }
 })
 
-  // POST request for comments
+  // POST request for creating a comment
   function onSubmit(data) {
     let token = localStorage.getItem('token')
     let userId = localStorage.getItem('userId')
@@ -109,6 +109,7 @@ commentsList.forEach(function (comment) {
       .then(function (response) {
         console.log(response)
         setCommentFieldOpen(false)
+        fetchComments()
       })
       .catch(console.log('Something went wrong'))
       setValue('textContent', '')
