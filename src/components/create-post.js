@@ -46,11 +46,13 @@ function CreatePost() {
         },
       )
 
-      .then(function (response) {
+      .then(response => {
         console.log(response)
         history.push('/news-feed')
       })
-      .catch(console.log('Something went wrong'))
+      .catch(error => {
+        console.log(error.response)
+      })
   }
 
   return (
