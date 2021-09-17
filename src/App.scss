@@ -168,6 +168,7 @@ input:focus {
     .form__textarea {
       @include border;
       @include focus-border;
+      resize: none;
       min-height: 200px;
       resize: none;
       font-family: unset;

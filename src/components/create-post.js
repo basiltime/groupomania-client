@@ -96,7 +96,7 @@ function CreatePost() {
         </div>
         <hr className="hr" />
         <button className="button" type="submit">
-          Create Post
+          Publish
         </button>
       </form>
     </main> )}
