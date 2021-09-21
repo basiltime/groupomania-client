@@ -27,10 +27,11 @@ describe('End to End Test', () => {
 
     // Navigates to newsfeed after account creation
     cy.url().should('include', '/news-feed')
+    cy.wait(4000)
 
     // Go to Account Details Page
     cy.get('.nav__icon').click()
-    cy.url().should('include', '/my-account')
+    cy.get('.main__header').should('have.text', 'Your Account')
     cy.wait(1000)
 
     // Log Out
