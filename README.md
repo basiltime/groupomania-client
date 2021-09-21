@@ -1,20 +1,7 @@
 # Groupomania Social Media Site
-Groupomania is a social media app, where users can create an account, publish written and multimedia content in a public forum, and like and comment on posts. 
-
+Groupomania is a social media app. Users can create an accoun to publish written and multimedia content in a public forum, as well as like and comment on posts. 
 
 ## To use the site
-This project is divided between two repositories- one for the frontend, and one for the backend. You will have to clone both to use the site.
+Visit https://groupomania-site.netlify.app to use the site. Create an account to log in and publish your first post!
 
-1. Clone this (frontend) repository
-
-2. Clone the backend repository from [https://github.com/basiltime/groupomania-server](here), then run `nodemon server` from the project root.
-
-3. Run `yarn start` from the frontend's root directory.
-The site should automatically launch. If it doesn't, navigate to http://localhost:3006.
-
-
-
-
-
-
-
+<img width="570" alt="image" src="https://user-images.githubusercontent.com/70965823/133868757-cb0ce9a0-fc3e-4825-a970-029cd22f78cb.png">
