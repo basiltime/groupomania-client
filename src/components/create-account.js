@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import LoadingSpinner from './loading-spinner'
 
-function CreateAccount() {
+function CreateAccount({ setIsLoggedIn }) {
   const [duplicateEmailError, setDuplicateEmailError] = useState(null)
   const [networkError, setNetworkError] = useState(null)
   const [imgPreview, setImgPreview] = useState(null)
@@ -38,6 +38,7 @@ function CreateAccount() {
         })
         localStorage.setItem('userId', resp.data.userId)
         localStorage.setItem('token', resp.data.token)
+        setIsLoggedIn(setIsLoggedIn => (true))
         history.push('/news-feed')
       } catch (error) {
         if (error.message === 'Network Error') {

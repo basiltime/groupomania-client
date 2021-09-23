@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 
-function DeleteAccount() {
+function DeleteAccount({ setIsLoggedIn }) {
     const history =  useHistory();
     
 
@@ -19,7 +19,8 @@ function DeleteAccount() {
         Authorization: token,
       }
       })
-      localStorage.clear();
+      localStorage.clear()
+      setIsLoggedIn(setIsLoggedIn => (false));
   } catch (error) {
     console.log(error)
   }

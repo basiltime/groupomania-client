@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 
 function Comments(props) {
-  const history = useHistory()
   const [commentsList, setCommentsList] = useState([])
   const [likesList, setLikesList] = useState([])
   const [commentFieldOpen, setCommentFieldOpen] = useState(false)
@@ -67,7 +65,7 @@ function Comments(props) {
   likesList.forEach(function (like) {
       if (like.postId === props.postId) {
           likesQty += 1
-          if (like.userId == localStorage.getItem('userId')) {
+          if (like.userId === localStorage.getItem('userId')) {
             userLikes = true
           } else { userLikes = false }
           if (likesQty === 1) {
@@ -164,7 +162,7 @@ commentsList.forEach(function (comment) {
 
       <div className="comments">
         {commentFieldOpen && (
-          <form onSubmit={handleSubmit(onSubmit)} class="comment-form">
+          <form onSubmit={handleSubmit(onSubmit)} className="comment-form">
             <input
               className="comment-input"
               placeholder="Type comment here"
@@ -188,7 +186,7 @@ commentsList.forEach(function (comment) {
                 <div className="comment-text">
                   <div><strong>{comment.firstName} {comment.lastName}</strong>
                   </div>
-                  <div class="comment-content">{comment.commentText}</div>
+                  <div className="comment-content">{comment.commentText}</div>
                   </div>
                 </div>
             ),
