@@ -19,9 +19,6 @@ import { useState, useEffect } from 'react'
 import React from 'react'
 library.add(faUser, faUserCircle, faThumbsUp, faComment, faTrash, faEdit)
 
-// Create a global state for whether user is loggedin
-// useEffect to get it everytime app loads
-//
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
