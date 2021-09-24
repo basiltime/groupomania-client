@@ -106,6 +106,7 @@ commentsList.forEach(function (comment) {
 
       .then(response =>  {
         console.log(response)
+        setValue('textContent', '')
         setCommentFieldOpen(false)
         fetchComments()
       })
