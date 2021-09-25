@@ -56,7 +56,7 @@ function CreatePost() {
   }
 
   return (
-    <div>
+    <>
     {isLoading ? ( <LoadingSpinner />) : (
     <main className="main">
       <form
@@ -64,7 +64,7 @@ function CreatePost() {
         className="form"
         encType="multipart/form-data"
       >
-        <h2 className="main__header" aria-level="1">Create Post</h2>
+        <h2 className="main__header create-post" aria-level="1">Create Post</h2>
         {errors.textContent && (
           <div role="alert" className="error">
             Post cannot be empty
@@ -78,6 +78,7 @@ function CreatePost() {
           name="textContent"
           placeholder="Start typing..."
           aria-label="Create Post"
+          required="true"
         />
         <img src={imgPreview} aria-label="Upload Preview" className="img-preview"/>
         
@@ -100,7 +101,7 @@ function CreatePost() {
         </button>
       </form>
     </main> )}
-    </div>
+    </>
   )
 }
 
