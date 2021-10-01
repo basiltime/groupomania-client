@@ -14,8 +14,6 @@ Main features of the site include the ability to publish written and multimedia 
 
 #### Option 1: Click [**here**](https://groupomania-site.netlify.app)  to view the deployed version. ####
 
-<br>
-
 #### Option 2: Run on localhost by following the instructions below: ####
 
 1. Make sure you have node and npm installed on your machine.
