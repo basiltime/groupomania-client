@@ -1,7 +1,55 @@
 # Groupomania Social Media Site
-Groupomania is a social media app. Users can create an accoun to publish written and multimedia content in a public forum, as well as like and comment on posts. 
 
-## To use the site
-Visit https://groupomania-site.netlify.app to use the site. Create an account to log in and publish your first post!
+This is the **front end** for Groupomania, a fullstack social media web app. The backend repo can be viewed [**here**](https://github.com/basiltime/groupomania-server)
 
-<img width="570" alt="image" src="https://user-images.githubusercontent.com/70965823/133868757-cb0ce9a0-fc3e-4825-a970-029cd22f78cb.png">
+Main features of the site include the ability to publish written and multimedia content in a public forum, like and comment on posts, as well as perform account deletion.
+
+<br>
+
+*⭐️ The front end of this project is deployed to Nelify, and the backend is deployed to Heroku.⭐️*
+
+<br>
+
+## How to use the site ##
+
+-----------------------------
+
+#### Option 1: Click [**here**](https://groupomania-site.netlify.app)  to view the deployed version. ####
+
+<br>
+
+#### Option 2: Run on localhost by following the instructions below: ####
+
+1. Make sure you have node and npm installed on your machine.
+2. Clone this repo
+3. Run `yarn start`
+4. Your browser should open the app. If it doesn't, navigate to http://localhost:3006.
+
+(Since the backend is deployed to Heroku, there is no need to download it. However, it can be viewed [**here**](https://github.com/basiltime/groupomania-server).)
+
+<br>
+
+## Testing ##
+
+-----------------------------
+
+  *Link to the test plan and testing instructions coming soon*
+
+
+
+<br>
+
+## Technology used for the frontend of the app: ##
+
+-----------------------------
+
+- React/JSX
+- SASS
+- AdobeXD wireframes
+- Cypress testing
+  
+
+<br>
+
+<img width="270" alt="image" src="https://user-images.githubusercontent.com/70965823/133868757-cb0ce9a0-fc3e-4825-a970-029cd22f78cb.png">
+
