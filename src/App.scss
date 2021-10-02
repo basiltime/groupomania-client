@@ -231,9 +231,12 @@ input:focus {
 
 .newsfeed {
   @include flex-column-center;
-  border: none;
   box-shadow: none;
   padding: 20px;
+  margin: 30px 0px;
+  padding: 15px;
+  max-width: 375px;
+  width: 87%;
   & button {
     margin: 20px 20px !important;
   }
@@ -241,8 +244,6 @@ input:focus {
 
 .post {
   margin: 10px 0px;
-  width: 100%;
-  width: 375px;
   border-radius: 10px;
   .post__heading {
     display: flex;
@@ -259,9 +260,11 @@ input:focus {
     }
     .post__author {
       margin: 0;
+      margin-right: 4px;
     }
     .post__timestamp {
       margin: 0;
+      margin-right: 4px;
       color: $border-color;
     }
   }

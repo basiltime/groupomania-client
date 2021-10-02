@@ -75,7 +75,7 @@ const Newsfeed = () => {
         {displayedPosts.map((post) => (
           <div key={post.postId} className="post">
             <div className="post__heading">
-              
+  
               <img
                 src={post.profilePicUrl}
                 className="profile-pic"
