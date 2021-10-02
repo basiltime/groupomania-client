@@ -27,7 +27,7 @@ Main features of the site include the ability to publish written and multimedia 
 
 ## Testing ##
 
-Tests were written with Cypress. Click [**here**](https://docs.google.com/document/d/1Hx5knZD0lctK5jXCKRUZPb5XHBm8kFpGLrYNlqBQHxE/edit?usp=sharing) to view the full test plan. 
+Tests were written with Cypress according to the end to end test plan. Click [**here**](https://docs.google.com/document/d/1Hx5knZD0lctK5jXCKRUZPb5XHBm8kFpGLrYNlqBQHxE/edit?usp=sharing) to view the test plan document. 
 
 <br>
 
