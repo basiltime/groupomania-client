@@ -11,7 +11,7 @@ function AccountWrapper({ setIsLoggedIn }) {
   const [lastName, setLastName] = useState(null)
   const [email, setEmail] = useState(null)
   const [error, setError] = useState(null)
-  const [profilePic, setProfilePic] = useState(false)
+  const [profilePic, setProfilePic] = useState('no-photo.png')
   const history = useHistory()
 
   useEffect(() => {
