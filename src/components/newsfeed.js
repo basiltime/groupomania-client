@@ -9,7 +9,6 @@ const Newsfeed = () => {
   const firstDisplay = posts.slice(0, 5);
   const [displayedPosts, setDisplayedPosts] = useState(firstDisplay);
   const [observedEl, setObservedEl] = useState(null);
-  const history = useHistory();
 
   // GET request for loading an array of all posts
   const fetchPosts = async () => {
@@ -60,6 +59,8 @@ const Newsfeed = () => {
     };
   }, [observedEl, observer]);
 
+  const history = useHistory();
+
   // Navigate to create-post page on button click
   function handleClick() {
     history.push("/create-post");
@@ -98,6 +99,7 @@ const Newsfeed = () => {
             <CommentsAndLikes postId={post.postId} />
           </div>
         ))}
+
         {posts.length > displayedPosts.length && (
           <p ref={setObservedEl}>LoadMore ...</p>
         )}

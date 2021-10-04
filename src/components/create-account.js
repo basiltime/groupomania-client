@@ -94,7 +94,7 @@ function CreateAccount({ setIsLoggedIn }) {
             {networkError && <div className="error"> {networkError} </div>}
             {errors.password && (
               <div role="alert" className="error">
-                Password is required
+                Password is required, and must be at least 7 characters long.
               </div>
             )}
             <input
@@ -125,7 +125,7 @@ function CreateAccount({ setIsLoggedIn }) {
               name="email"
             />
             <input
-              {...register("password", { required: true })}
+              {...register("password", { required: true, minLength: 7})}
               autoComplete="off"
               type="password"
               className="form__input"
