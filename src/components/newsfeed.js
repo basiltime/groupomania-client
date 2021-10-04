@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import '../App.scss'
-import Comments from './comments.js'
+import CommentsAndLikes from './comments-and-likes.js'
 
 
 const Newsfeed = () => {
@@ -98,7 +98,7 @@ const Newsfeed = () => {
               ></img>
             </div>
 
-            <Comments postId={post.postId} />
+            <CommentsAndLikes postId={post.postId} />
           </div>
         ))}
 
