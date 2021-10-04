@@ -14,6 +14,7 @@ function AccountWrapper({ setIsLoggedIn }) {
   const [profilePic, setProfilePic] = useState('no-photo.png')
   const history = useHistory()
 
+  // When page loads, send GET request to get user details
   useEffect(() => {
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')

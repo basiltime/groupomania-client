@@ -14,7 +14,7 @@ function Comments(props) {
   let likesNumberText = 'Likes'
   let userLikes = false
 
-  // GET all comments
+  // GET array of all comments
   const fetchComments = async () => {
     let token = localStorage.getItem('token')
     const comments = await axios(
@@ -28,6 +28,7 @@ function Comments(props) {
     setCommentsList(comments.data.data)
   }
 
+  // GET array of all likes
   const fetchLikes = async () => {
     let token = localStorage.getItem('token')
     const likes = await axios('https://groupomania2.herokuapp.com/likes', {
@@ -35,8 +36,8 @@ function Comments(props) {
         Authorization: token,
       },
     })
-    setLikesList(likes.data.data)
     // Update likes qty every time a post is liked/unliked
+    setLikesList(likes.data.data)
   }
 
   // Send GET request for all likes/comments upon component rendering
@@ -61,27 +62,12 @@ function Comments(props) {
         },
       },
     )
+    // Update likes array in state with response from POST request
     setLikesList(likes.data.data)
-    // Set quantity of likes for the post
-    likesList.forEach(function (like) {
-      if (like.postId === props.postId) {
-        likesQty += 1
-        console.log(like.userId)
-      console.log(localStorage.getItem('userId'))
-        if (like.userId === localStorage.getItem('userId')) {
-          userLikes = true
-        } else {
-          userLikes = false
-        }
-        if (likesQty === 1) {
-          likesNumberText = 'Like'
-        } else likesNumberText = 'Likes'
-      }
-    })
   }
 
-  // Set quantity of likes for the post
-  likesList.forEach(function (like) {
+   // Set quantity of likes (to be displayed in likes counter)
+   likesList.forEach(function (like) {
     if (like.postId === props.postId) {
       likesQty += 1
       if (like.userId == localStorage.getItem('userId')) {
