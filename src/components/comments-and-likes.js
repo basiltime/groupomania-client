@@ -1,57 +1,57 @@
-import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons'
-import { faThumbsUp as solidFaThumbsUp } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useForm } from 'react-hook-form'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { faThumbsUp, faComment } from "@fortawesome/free-regular-svg-icons";
+import { faThumbsUp as solidFaThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function Comments(props) {
-  const [commentsList, setCommentsList] = useState([])
-  const [likesList, setLikesList] = useState([])
-  const [commentFieldOpen, setCommentFieldOpen] = useState(false)
-  const { register, handleSubmit, setValue } = useForm()
-  let likesQty = 0
-  let likesNumberText = 'Likes'
-  let userLikes = false
+  const [commentsList, setCommentsList] = useState([]);
+  const [likesList, setLikesList] = useState([]);
+  const [commentFieldOpen, setCommentFieldOpen] = useState(false);
+  const { register, handleSubmit, setValue } = useForm();
+  let likesQty = 0;
+  let likesNumberText = "Likes";
+  let userLikes = false;
 
   // GET array of all comments
   const fetchComments = async () => {
-    let token = localStorage.getItem('token')
+    let token = localStorage.getItem("token");
     const comments = await axios(
-      'https://groupomania2.herokuapp.com/comments',
+      "https://groupomania2.herokuapp.com/comments",
       {
         headers: {
           Authorization: token,
         },
-      },
-    )
-    setCommentsList(comments.data.data)
-  }
+      }
+    );
+    setCommentsList(comments.data.data);
+  };
 
   // GET array of all likes
   const fetchLikes = async () => {
-    let token = localStorage.getItem('token')
-    const likes = await axios('https://groupomania2.herokuapp.com/likes', {
+    let token = localStorage.getItem("token");
+    const likes = await axios("https://groupomania2.herokuapp.com/likes", {
       headers: {
         Authorization: token,
       },
-    })
+    });
     // Update likes qty every time a post is liked/unliked
-    setLikesList(likes.data.data)
-  }
+    setLikesList(likes.data.data);
+  };
 
   // Send GET request for all likes/comments upon component rendering
   useEffect(() => {
-    fetchComments()
-    fetchLikes()
-  }, [])
+    fetchComments();
+    fetchLikes();
+  }, []);
 
   // Send POST request on click of like button
   const like = async () => {
-    let token = localStorage.getItem('token')
-    let userId = localStorage.getItem('userId')
+    let token = localStorage.getItem("token");
+    let userId = localStorage.getItem("userId");
     const likes = await axios.post(
-      'https://groupomania2.herokuapp.com/likes',
+      "https://groupomania2.herokuapp.com/likes",
       {
         userId: userId,
         postId: props.postId,
@@ -60,46 +60,46 @@ function Comments(props) {
         headers: {
           Authorization: token,
         },
-      },
-    )
+      }
+    );
     // Update likes array in state with response from POST request
-    setLikesList(likes.data.data)
-  }
+    setLikesList(likes.data.data);
+  };
 
-   // Set quantity of likes (to be displayed in likes counter)
-   likesList.forEach(function (like) {
+  // Set quantity of likes (to be displayed in likes counter)
+  likesList.forEach(function (like) {
     if (like.postId === props.postId) {
-      likesQty += 1
-      if (like.userId == localStorage.getItem('userId')) {
-        userLikes = true
+      likesQty += 1;
+      if (like.userId == localStorage.getItem("userId")) {
+        userLikes = true;
       } else {
-        userLikes = false
+        userLikes = false;
       }
       if (likesQty === 1) {
-        likesNumberText = 'Like'
-      } else likesNumberText = 'Likes'
+        likesNumberText = "Like";
+      } else likesNumberText = "Likes";
     }
-  })
+  });
 
   // Display number of comments for the post
-  let commentNumber = 0
-  let commentNumberText = 'Comments'
+  let commentNumber = 0;
+  let commentNumberText = "Comments";
   commentsList.forEach(function (comment) {
     if (comment.postId === props.postId) {
-      commentNumber += 1
+      commentNumber += 1;
       if (commentNumber === 1) {
-        commentNumberText = 'Comment'
-      } else commentNumberText = 'Comments'
+        commentNumberText = "Comment";
+      } else commentNumberText = "Comments";
     }
-  })
+  });
 
   // POST request for creating a comment
   function onSubmit(data) {
-    let token = localStorage.getItem('token')
-    let userId = localStorage.getItem('userId')
+    let token = localStorage.getItem("token");
+    let userId = localStorage.getItem("userId");
     axios
       .post(
-        'https://groupomania2.herokuapp.com/comments',
+        "https://groupomania2.herokuapp.com/comments",
         {
           commentText: data.textContent,
           postId: props.postId,
@@ -109,28 +109,28 @@ function Comments(props) {
           headers: {
             Authorization: token,
           },
-        },
+        }
       )
 
       .then((response) => {
-        console.log(response)
-        setValue('textContent', '')
-        setCommentFieldOpen(false)
-        fetchComments()
+        console.log(response);
+        setValue("textContent", "");
+        setCommentFieldOpen(false);
+        fetchComments();
       })
       .catch((error) => {
-        console.log(error.response)
-        setValue('textContent', '')
-        fetchComments()
-      })
+        console.log(error.response);
+        setValue("textContent", "");
+        fetchComments();
+      });
   }
 
   // Display input field to enter comments
   function showInput() {
     if (commentFieldOpen === false) {
-      setCommentFieldOpen(true)
+      setCommentFieldOpen(true);
     } else {
-      setCommentFieldOpen(false)
+      setCommentFieldOpen(false);
     }
   }
 
@@ -182,7 +182,7 @@ function Comments(props) {
               className="comment-input"
               placeholder="Type comment here"
               autoComplete="off"
-              {...register('textContent', { required: true, minLength: 1 })}
+              {...register("textContent", { required: true, minLength: 1 })}
             ></input>
           </form>
         )}
@@ -206,11 +206,11 @@ function Comments(props) {
                   <div className="comment-content">{comment.commentText}</div>
                 </div>
               </div>
-            ),
+            )
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default Comments
+export default Comments;

@@ -1,40 +1,41 @@
-import axios from 'axios'
-import { useForm } from 'react-hook-form'
-import { useHistory } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function LandingPage({ setIsLoggedIn }) {
-  const history = useHistory()
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
-  const [error, setError] = useState(null)
+  } = useForm();
+  const [error, setError] = useState(null);
 
+  // POST request for login
   function onSubmit(data) {
-    localStorage.clear()
+    localStorage.clear();
     const loginRequest = async () => {
       try {
         const resp = await axios.post(
-          'https://groupomania2.herokuapp.com/users/login',
+          "https://groupomania2.herokuapp.com/users/login",
           {
             email: data.email,
             password: data.password,
-          },
-        )
-        localStorage.setItem('token', resp.data.token)
-        localStorage.setItem('userId', resp.data.userId)
-        setIsLoggedIn(setIsLoggedIn => (true))
-        history.push('/news-feed')
+          }
+        );
+        localStorage.setItem("token", resp.data.token);
+        localStorage.setItem("userId", resp.data.userId);
+        setIsLoggedIn((setIsLoggedIn) => true);
+        history.push("/news-feed");
       } catch {
-        setError('The email or password you entered is incorrect')
+        setError("The email or password you entered is incorrect");
       }
-    }
-    loginRequest()
+    };
+    loginRequest();
   }
-  
+
   return (
     <main className="main">
       <img className="main__logo" src="/black-logo.svg" alt="logo" />
@@ -54,7 +55,7 @@ function LandingPage({ setIsLoggedIn }) {
         )}
         {error && <div className="error"> {error} </div>}
         <input
-          {...register('email', { required: true })}
+          {...register("email", { required: true })}
           autoComplete="off"
           type="email"
           className="form__input"
@@ -62,7 +63,7 @@ function LandingPage({ setIsLoggedIn }) {
           aria-label="Email"
         />
         <input
-          {...register('password', { required: true, minLength: 6 })}
+          {...register("password", { required: true, minLength: 6 })}
           autoComplete="off"
           type="password"
           className="form__input"
@@ -80,7 +81,7 @@ function LandingPage({ setIsLoggedIn }) {
         </Link>
       </div>
     </main>
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;

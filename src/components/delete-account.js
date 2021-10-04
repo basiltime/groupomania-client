@@ -1,44 +1,37 @@
-import { Link, useHistory } from "react-router-dom"
-import axios from 'axios'
-
-
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 function DeleteAccount({ setIsLoggedIn }) {
-    const history =  useHistory();
-    
+  const history = useHistory();
+  const handleRemoveAccount = () => {
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
 
-    const handleRemoveAccount = () => {
-    
-    const userId = localStorage.getItem("userId")
-    const token = localStorage.getItem("token")
     const deleteAcct = async () => {
-    
-    try {
-    await axios.delete(`https://groupomania2.herokuapp.com/users/${userId}`, {
-      headers: {
-        Authorization: token,
+      try {
+        await axios.delete(
+          `https://groupomania2.herokuapp.com/users/${userId}`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        localStorage.clear();
+        setIsLoggedIn((setIsLoggedIn) => false);
+      } catch (error) {
+        console.log(error);
       }
-      })
-      localStorage.clear()
-      setIsLoggedIn(setIsLoggedIn => (false));
-  } catch (error) {
-    console.log(error)
-  }
-    }
+    };
 
-    deleteAcct()
-    history.push("/")
-  }
+    deleteAcct();
+    history.push("/");
+  };
 
-  
-  
-  
-
-
-    return ( <div className="main">
-      
+  return (
+    <div className="main">
       <h3 class="text-center" aria-level="1">
-      Are you sure you want to delete your Grouponania account?
+        Are you sure you want to delete your Grouponania account?
       </h3>
       <br />
       <br />
@@ -46,10 +39,14 @@ function DeleteAccount({ setIsLoggedIn }) {
       <br />
       <br />
       <br />
-      <button type="submit" className="button" onClick={handleRemoveAccount}>YES, DELETE MY ACCOUNT</button>
-      <Link to="/news-feed" className="button">Cancel </Link>
-      </div>
-    )
-  }
+      <button type="submit" className="button" onClick={handleRemoveAccount}>
+        YES, DELETE MY ACCOUNT
+      </button>
+      <Link to="/news-feed" className="button">
+        Cancel{" "}
+      </Link>
+    </div>
+  );
+}
 
-  export default DeleteAccount
+export default DeleteAccount;
