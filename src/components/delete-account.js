@@ -2,11 +2,14 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 function DeleteAccount({ setIsLoggedIn }) {
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
   const history = useHistory();
-  const handleRemoveAccount = () => {
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("token");
 
+  // Redirect to landing page if not logged in for some reason
+  if (!token) history.push('/')
+
+  const handleRemoveAccount = () => {
     const deleteAcct = async () => {
       try {
         await axios.delete(
@@ -23,7 +26,6 @@ function DeleteAccount({ setIsLoggedIn }) {
         console.log(error);
       }
     };
-
     deleteAcct();
     history.push("/");
   };

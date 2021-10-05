@@ -9,15 +9,13 @@ function CreateAccount({ setIsLoggedIn }) {
   const [networkError, setNetworkError] = useState(null);
   const [imgPreview, setImgPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
-
-  const history = useHistory();
 
   function onSubmit(data) {
     localStorage.clear();

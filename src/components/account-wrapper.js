@@ -6,40 +6,46 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
 
-function AccountWrapper({ setIsLoggedIn }) {
+function AccountWrapper({ setIsLoggedIn, isLoggedIn }) {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
   const [error, setError] = useState(null);
   const [profilePic, setProfilePic] = useState("no-photo.png");
   const history = useHistory();
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
-  // When page loads, send GET request to get user details
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-    const userData = async () => {
-      try {
-        const resp = await axios.get(
-          `https://groupomania2.herokuapp.com/users/${userId}`,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-        setFirstName(resp.data.firstName);
-        setLastName(resp.data.lastName);
-        setEmail(resp.data.email);
-        setProfilePic(resp.data.profilePicUrl);
-      } catch (error) {
-        if (error) {
-          setError("Problem retrieving account information");
-        }
-      }
-    };
 
-    userData();
+    // Redirect to landing page if not logged in for some reason
+    if (!token) history.push('/')
+
+    // Otherwise, send GET request for user's details
+      const userData = async () => {
+        try {
+          const resp = await axios.get(
+            `https://groupomania2.herokuapp.com/users/${userId}`,
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
+          setFirstName(resp.data.firstName);
+          setLastName(resp.data.lastName);
+          setEmail(resp.data.email);
+          setProfilePic(resp.data.profilePicUrl);
+        } catch (error) {
+          if (error) {
+            setError("Problem retrieving account information");
+          }
+        }
+      };
+  
+      userData();
+    
   }, []);
 
   // Log Out Button

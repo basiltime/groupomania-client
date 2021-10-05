@@ -8,6 +8,8 @@ function CreatePost() {
   const [imgPreview, setImgPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
   const {
     register,
     handleSubmit,
@@ -15,11 +17,12 @@ function CreatePost() {
     formState: { errors },
   } = useForm();
 
+  // Redirect to landing page if not logged in for some reason
+  if (!token) history.push('/')
+
   // POST requst for form submission
   function onSubmit(data) {
     setIsLoading(true);
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("token");
     let date = new Date().toLocaleDateString();
     let time = new Date().toLocaleTimeString([], {
       hour: "2-digit",

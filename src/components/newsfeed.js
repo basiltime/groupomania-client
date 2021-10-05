@@ -10,9 +10,13 @@ const Newsfeed = () => {
   const firstDisplay = posts.slice(0, 5)
   const [displayedPosts, setDisplayedPosts] = useState(firstDisplay)
   const [observedEl, setObservedEl] = useState(null)
+  const token = localStorage.getItem('token')
+  const history = useHistory()
+
+  // Redirect to landing page if not logged in for some reason
+  if (!token) history.push('/')
 
   const fetchPosts = async () => {
-    let token = localStorage.getItem('token')
     const posts = await axios('https://groupomania2.herokuapp.com/posts', {
       headers: {
         Authorization: token,
@@ -59,8 +63,6 @@ const Newsfeed = () => {
       }
     }
   }, [observedEl, observer])
-
-  const history = useHistory()
 
   function handleClick() {
     history.push('/create-post')
