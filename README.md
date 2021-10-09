@@ -21,7 +21,7 @@ Main features of the site include the ability to publish written and multimedia 
 3. Run `yarn start` from the root directory
 4. The site should open in a new browser window. If it doesn't, navigate to http://localhost:3006.
 
-(Since the backend is deployed to Heroku, there is no need to download it. However, the backend codebase can be viewed can be viewed [**here**](https://github.com/basiltime/groupomania-server).)
+(Since the backend is deployed to Heroku, there is no need to download it. However, the backend codebase can be viewed [**here**](https://github.com/basiltime/groupomania-server).)
 
 <br>
 
